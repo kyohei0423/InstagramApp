@@ -24,6 +24,9 @@
 		0F8445C11BCEEC5E00E0DE32 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445BA1BCEEC5E00E0DE32 /* ParseFacebookUtilsV4.framework */; settings = {ASSET_TAGS = (); }; };
 		0F8445C21BCEEC5E00E0DE32 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445BB1BCEEC5E00E0DE32 /* ParseTwitterUtils.framework */; settings = {ASSET_TAGS = (); }; };
 		0F8445C31BCEEC5E00E0DE32 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445BC1BCEEC5E00E0DE32 /* ParseUI.framework */; settings = {ASSET_TAGS = (); }; };
+		0F8445C81BCEFB0200E0DE32 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445C51BCEFB0200E0DE32 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		0F8445C91BCEFB0200E0DE32 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445C61BCEFB0200E0DE32 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		0F8445CA1BCEFB0200E0DE32 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445C71BCEFB0200E0DE32 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		E20F23B61BCD189F0077FEE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */; };
 		E20F23B81BCD189F0077FEE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23B71BCD189F0077FEE4 /* ViewController.swift */; };
 		E20F23BB1BCD189F0077FEE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20F23B91BCD189F0077FEE4 /* Main.storyboard */; };
@@ -68,6 +71,10 @@
 		0F8445BA1BCEEC5E00E0DE32 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = "InstagramApp/parse-library-1/ParseFacebookUtilsV4.framework"; sourceTree = "<group>"; };
 		0F8445BB1BCEEC5E00E0DE32 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseTwitterUtils.framework; path = "InstagramApp/parse-library-1/ParseTwitterUtils.framework"; sourceTree = "<group>"; };
 		0F8445BC1BCEEC5E00E0DE32 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "InstagramApp/parse-library-1/ParseUI.framework"; sourceTree = "<group>"; };
+		0F8445C51BCEFB0200E0DE32 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		0F8445C61BCEFB0200E0DE32 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		0F8445C71BCEFB0200E0DE32 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		0F8445CB1BCEFB4900E0DE32 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		E20F23B21BCD189F0077FEE4 /* InstagramApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E20F23B71BCD189F0077FEE4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,11 +102,14 @@
 				0F8445AF1BCEEAF400E0DE32 /* StoreKit.framework in Frameworks */,
 				0F8445AD1BCEEAE600E0DE32 /* Security.framework in Frameworks */,
 				0F8445C21BCEEC5E00E0DE32 /* ParseTwitterUtils.framework in Frameworks */,
+				0F8445C81BCEFB0200E0DE32 /* FBSDKCoreKit.framework in Frameworks */,
 				0F8445AB1BCEEAD800E0DE32 /* QuartzCore.framework in Frameworks */,
 				0F8445A91BCEEACE00E0DE32 /* CoreLocation.framework in Frameworks */,
 				0F8445C31BCEEC5E00E0DE32 /* ParseUI.framework in Frameworks */,
 				0F8445A71BCEEAC200E0DE32 /* CoreGraphics.framework in Frameworks */,
+				0F8445CA1BCEFB0200E0DE32 /* FBSDKShareKit.framework in Frameworks */,
 				0F8445BD1BCEEC5E00E0DE32 /* Bolts.framework in Frameworks */,
+				0F8445C91BCEFB0200E0DE32 /* FBSDKLoginKit.framework in Frameworks */,
 				0F8445A51BCEEAB000E0DE32 /* CFNetwork.framework in Frameworks */,
 				0F8445BE1BCEEC5E00E0DE32 /* Parse.framework in Frameworks */,
 				0F8445A31BCEEAA200E0DE32 /* AudioToolbox.framework in Frameworks */,
@@ -128,6 +138,9 @@
 		0F8445C41BCEEC8000E0DE32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F8445C51BCEFB0200E0DE32 /* FBSDKCoreKit.framework */,
+				0F8445C61BCEFB0200E0DE32 /* FBSDKLoginKit.framework */,
+				0F8445C71BCEFB0200E0DE32 /* FBSDKShareKit.framework */,
 				0F8445B41BCEEBC600E0DE32 /* libsqlite3.tbd */,
 				0F8445B21BCEEBB300E0DE32 /* libz.tbd */,
 				0F8445B01BCEEB0400E0DE32 /* SystemConfiguration.framework */,
@@ -175,6 +188,7 @@
 			children = (
 				E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */,
 				E20F23B71BCD189F0077FEE4 /* ViewController.swift */,
+				0F8445CB1BCEFB4900E0DE32 /* Bridging-Header.h */,
 				E20F23B91BCD189F0077FEE4 /* Main.storyboard */,
 				E20F23BC1BCD189F0077FEE4 /* Assets.xcassets */,
 				E20F23BE1BCD189F0077FEE4 /* LaunchScreen.storyboard */,
@@ -475,11 +489,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/InstagramApp/parse-library-1",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = InstagramApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seokyohei.InstagramApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "InstagramApp/Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -490,11 +506,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/InstagramApp/parse-library-1",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = InstagramApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seokyohei.InstagramApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "InstagramApp/Bridging-Header.h";
 			};
 			name = Release;
 		};
