@@ -16,7 +16,7 @@ enum InstagramAppErrorType : Int{
 }
 
 class ParseAccess: NSObject {
-    func createUser(name:String?, password:String?, email:String?, icon:UIImage?, complitionHander:(succeeded:Bool, error:NSError?) -> Void){
+    func signUpUser(name:String?, password:String?, email:String?, icon:UIImage?, complitionHander:(succeeded:Bool, error:NSError?) -> Void){
         let user = PFUser()
         
         user.username = name
@@ -48,12 +48,40 @@ class ParseAccess: NSObject {
         }
         
         user.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
-            if error != nil{
+            if error != nil {
                 complitionHander(succeeded: false, error: error)
+                return
             }
             else{
-                complitionHander(succeeded: true, error: error)
+                if PFUser.currentUser() == nil {
+                    complitionHander(succeeded: true, error: error)
+                }
+                else {
+                    var dict = [String:AnyObject]()
+                    let user = PFUser.currentUser()!
+                    dict["username"] = user.username!
+                    dict["password"] = user.password!
+                    NSUserDefaults.standardUserDefaults().setObject(dict, forKey: "LoginUser")
+                    complitionHander(succeeded: true, error: error)
+                }
             }
+        }
+    }
+    
+    func loginUser(name:String, password:String, complitionHander:((succeeded:Bool, user:PFUser?, error:NSError?) -> Void)?){
+        PFUser.logInWithUsernameInBackground(name, password:password) { (user, error) -> Void in
+            if error != nil {
+                print(error)
+                complitionHander?(succeeded: false, user: nil, error: error)
+                return
+            }
+            if user == nil{
+                complitionHander?(succeeded: false, user: nil, error: error)
+            }
+            else{
+                complitionHander?(succeeded: true, user: user, error: error)
+            }
+            
         }
     }
 }

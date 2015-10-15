@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F02F4EA1BCFD3D9009FE539 /* NonLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F02F4E91BCFD3D9009FE539 /* NonLoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		0F02F4EE1BCFFA65009FE539 /* InstagramAppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F02F4ED1BCFFA65009FE539 /* InstagramAppExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		0F8445A31BCEEAA200E0DE32 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445A21BCEEAA200E0DE32 /* AudioToolbox.framework */; };
 		0F8445A51BCEEAB000E0DE32 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445A41BCEEAB000E0DE32 /* CFNetwork.framework */; };
 		0F8445A71BCEEAC200E0DE32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445A61BCEEAC200E0DE32 /* CoreGraphics.framework */; };
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F02F4E91BCFD3D9009FE539 /* NonLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonLoginViewController.swift; sourceTree = "<group>"; };
+		0F02F4ED1BCFFA65009FE539 /* InstagramAppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAppExtensions.swift; sourceTree = "<group>"; };
 		0F8445A21BCEEAA200E0DE32 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0F8445A41BCEEAB000E0DE32 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0F8445A61BCEEAC200E0DE32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -174,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				0F91BF4F1BCF896B003E1BC2 /* ParseAccess.swift */,
+				0F02F4ED1BCFFA65009FE539 /* InstagramAppExtensions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -188,6 +193,8 @@
 		0F91BF4E1BCF888C003E1BC2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0F91BF511BCF8BD3003E1BC2 /* SignUpViewController.swift */,
+				0F02F4E91BCFD3D9009FE539 /* NonLoginViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -229,7 +236,6 @@
 				0F91BF4E1BCF888C003E1BC2 /* Controller */,
 				E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */,
 				E20F23B71BCD189F0077FEE4 /* ViewController.swift */,
-				0F91BF511BCF8BD3003E1BC2 /* SignUpViewController.swift */,
 				0F8445CB1BCEFB4900E0DE32 /* Bridging-Header.h */,
 				E20F23B91BCD189F0077FEE4 /* Main.storyboard */,
 				0F8445CC1BCF030B00E0DE32 /* Login.storyboard */,
@@ -393,7 +399,9 @@
 			files = (
 				E20F23B81BCD189F0077FEE4 /* ViewController.swift in Sources */,
 				0F91BF521BCF8BD3003E1BC2 /* SignUpViewController.swift in Sources */,
+				0F02F4EA1BCFD3D9009FE539 /* NonLoginViewController.swift in Sources */,
 				E20F23B61BCD189F0077FEE4 /* AppDelegate.swift in Sources */,
+				0F02F4EE1BCFFA65009FE539 /* InstagramAppExtensions.swift in Sources */,
 				0F91BF501BCF896B003E1BC2 /* ParseAccess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
