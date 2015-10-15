@@ -10,10 +10,16 @@
 		E20F23B61BCD189F0077FEE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */; };
 		E20F23B81BCD189F0077FEE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23B71BCD189F0077FEE4 /* ViewController.swift */; };
 		E20F23BB1BCD189F0077FEE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20F23B91BCD189F0077FEE4 /* Main.storyboard */; };
-		E20F23BD1BCD189F0077FEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E20F23BC1BCD189F0077FEE4 /* Assets.xcassets */; };
 		E20F23C01BCD189F0077FEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20F23BE1BCD189F0077FEE4 /* LaunchScreen.storyboard */; };
 		E20F23CB1BCD189F0077FEE4 /* InstagramAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23CA1BCD189F0077FEE4 /* InstagramAppTests.swift */; };
 		E20F23D61BCD189F0077FEE4 /* InstagramAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23D51BCD189F0077FEE4 /* InstagramAppUITests.swift */; };
+		E20F23E81BCD630D0077FEE4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23E71BCD630D0077FEE4 /* Post.swift */; settings = {ASSET_TAGS = (); }; };
+		E20F23EA1BCD65C80077FEE4 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23E91BCD65C80077FEE4 /* PostManager.swift */; settings = {ASSET_TAGS = (); }; };
+		E20F23F01BCE71C50077FEE4 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23EF1BCE71C50077FEE4 /* TimeLineViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E20F23F21BCE76B20077FEE4 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E20F23F11BCE76B20077FEE4 /* camera@2x.png */; settings = {ASSET_TAGS = (); }; };
+		E20F23F71BCF9F960077FEE4 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20F23F61BCF9F960077FEE4 /* Photos.framework */; };
+		E20F23F91BCF9FA40077FEE4 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20F23F81BCF9FA40077FEE4 /* PhotosUI.framework */; };
+		E20F23FB1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23FA1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +44,6 @@
 		E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E20F23B71BCD189F0077FEE4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E20F23BA1BCD189F0077FEE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E20F23BC1BCD189F0077FEE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E20F23BF1BCD189F0077FEE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E20F23C11BCD189F0077FEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E20F23C61BCD189F0077FEE4 /* InstagramAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +52,13 @@
 		E20F23D11BCD189F0077FEE4 /* InstagramAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20F23D51BCD189F0077FEE4 /* InstagramAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAppUITests.swift; sourceTree = "<group>"; };
 		E20F23D71BCD189F0077FEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E20F23E71BCD630D0077FEE4 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		E20F23E91BCD65C80077FEE4 /* PostManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
+		E20F23EF1BCE71C50077FEE4 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
+		E20F23F11BCE76B20077FEE4 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		E20F23F61BCF9F960077FEE4 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		E20F23F81BCF9FA40077FEE4 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
+		E20F23FA1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoosePhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E20F23F91BCF9FA40077FEE4 /* PhotosUI.framework in Frameworks */,
+				E20F23F71BCF9F960077FEE4 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +95,8 @@
 				E20F23C91BCD189F0077FEE4 /* InstagramAppTests */,
 				E20F23D41BCD189F0077FEE4 /* InstagramAppUITests */,
 				E20F23B31BCD189F0077FEE4 /* Products */,
+				E20F23F51BCF9F6A0077FEE4 /* Frameworks */,
+				E20F23F11BCE76B20077FEE4 /* camera@2x.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,10 +113,11 @@
 		E20F23B41BCD189F0077FEE4 /* InstagramApp */ = {
 			isa = PBXGroup;
 			children = (
+				E20F23E61BCD57A20077FEE4 /* Model */,
+				E20F23E31BCD4FB00077FEE4 /* Controller */,
 				E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */,
 				E20F23B71BCD189F0077FEE4 /* ViewController.swift */,
 				E20F23B91BCD189F0077FEE4 /* Main.storyboard */,
-				E20F23BC1BCD189F0077FEE4 /* Assets.xcassets */,
 				E20F23BE1BCD189F0077FEE4 /* LaunchScreen.storyboard */,
 				E20F23C11BCD189F0077FEE4 /* Info.plist */,
 			);
@@ -123,6 +140,33 @@
 				E20F23D71BCD189F0077FEE4 /* Info.plist */,
 			);
 			path = InstagramAppUITests;
+			sourceTree = "<group>";
+		};
+		E20F23E31BCD4FB00077FEE4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E20F23EF1BCE71C50077FEE4 /* TimeLineViewController.swift */,
+				E20F23FA1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E20F23E61BCD57A20077FEE4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E20F23E71BCD630D0077FEE4 /* Post.swift */,
+				E20F23E91BCD65C80077FEE4 /* PostManager.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E20F23F51BCF9F6A0077FEE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E20F23F81BCF9FA40077FEE4 /* PhotosUI.framework */,
+				E20F23F61BCF9F960077FEE4 /* Photos.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,8 +273,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20F23C01BCD189F0077FEE4 /* LaunchScreen.storyboard in Resources */,
-				E20F23BD1BCD189F0077FEE4 /* Assets.xcassets in Resources */,
 				E20F23BB1BCD189F0077FEE4 /* Main.storyboard in Resources */,
+				E20F23F21BCE76B20077FEE4 /* camera@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,8 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E20F23F01BCE71C50077FEE4 /* TimeLineViewController.swift in Sources */,
 				E20F23B81BCD189F0077FEE4 /* ViewController.swift in Sources */,
+				E20F23FB1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift in Sources */,
+				E20F23EA1BCD65C80077FEE4 /* PostManager.swift in Sources */,
 				E20F23B61BCD189F0077FEE4 /* AppDelegate.swift in Sources */,
+				E20F23E81BCD630D0077FEE4 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
