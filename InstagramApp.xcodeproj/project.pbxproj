@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0F02F4EA1BCFD3D9009FE539 /* NonLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F02F4E91BCFD3D9009FE539 /* NonLoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		0F02F4EE1BCFFA65009FE539 /* InstagramAppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F02F4ED1BCFFA65009FE539 /* InstagramAppExtensions.swift */; settings = {ASSET_TAGS = (); }; };
+		0F02F4F01BD0D11E009FE539 /* shibuya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F02F4EF1BD0D11E009FE539 /* shibuya.jpg */; settings = {ASSET_TAGS = (); }; };
+		0F02F4F21BD166C4009FE539 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F02F4F11BD166C4009FE539 /* TriangleView.swift */; settings = {ASSET_TAGS = (); }; };
 		0F8445A31BCEEAA200E0DE32 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445A21BCEEAA200E0DE32 /* AudioToolbox.framework */; };
 		0F8445A51BCEEAB000E0DE32 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445A41BCEEAB000E0DE32 /* CFNetwork.framework */; };
 		0F8445A71BCEEAC200E0DE32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8445A61BCEEAC200E0DE32 /* CoreGraphics.framework */; };
@@ -62,6 +64,8 @@
 /* Begin PBXFileReference section */
 		0F02F4E91BCFD3D9009FE539 /* NonLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonLoginViewController.swift; sourceTree = "<group>"; };
 		0F02F4ED1BCFFA65009FE539 /* InstagramAppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAppExtensions.swift; sourceTree = "<group>"; };
+		0F02F4EF1BD0D11E009FE539 /* shibuya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shibuya.jpg; sourceTree = "<group>"; };
+		0F02F4F11BD166C4009FE539 /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
 		0F8445A21BCEEAA200E0DE32 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0F8445A41BCEEAB000E0DE32 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0F8445A61BCEEAC200E0DE32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -186,6 +190,7 @@
 		0F8445CF1BCF088700E0DE32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0F02F4F11BD166C4009FE539 /* TriangleView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 		0F91BF531BCF981C003E1BC2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F02F4EF1BD0D11E009FE539 /* shibuya.jpg */,
 				0F91BF541BCF982D003E1BC2 /* testIcon.jpeg */,
 			);
 			name = Images;
@@ -369,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F8445CD1BCF030B00E0DE32 /* Login.storyboard in Resources */,
+				0F02F4F01BD0D11E009FE539 /* shibuya.jpg in Resources */,
 				E20F23C01BCD189F0077FEE4 /* LaunchScreen.storyboard in Resources */,
 				E20F23BD1BCD189F0077FEE4 /* Assets.xcassets in Resources */,
 				0F91BF551BCF982D003E1BC2 /* testIcon.jpeg in Resources */,
@@ -397,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F02F4F21BD166C4009FE539 /* TriangleView.swift in Sources */,
 				E20F23B81BCD189F0077FEE4 /* ViewController.swift in Sources */,
 				0F91BF521BCF8BD3003E1BC2 /* SignUpViewController.swift in Sources */,
 				0F02F4EA1BCFD3D9009FE539 /* NonLoginViewController.swift in Sources */,

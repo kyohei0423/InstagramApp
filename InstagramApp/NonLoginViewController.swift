@@ -8,46 +8,61 @@
 
 import UIKit
 
-class NonLoginViewController: UIViewController {
+class NonLoginViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var FBLoginButton: UIButton!
+    @IBOutlet weak var signUpView: UIView!
+
+    @IBOutlet var arrowViewCenterIsSignUpConstraint: NSLayoutConstraint!
+    var arrowViewCenterIsLoginConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var arrowView: UIView!
+    
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var passField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailField.delegate = self
+        nameField.delegate = self
+        passField.delegate = self
+
+        emailField.becomeFirstResponder()
+
+        arrowView.backgroundColor = UIColor.clearColor()
+        
+        arrowViewCenterIsLoginConstraint = NSLayoutConstraint(item: arrowViewCenterIsSignUpConstraint.firstItem,
+            attribute: arrowViewCenterIsSignUpConstraint.firstAttribute,
+            relatedBy: arrowViewCenterIsSignUpConstraint.relation,
+            toItem: loginButton,
+            attribute: arrowViewCenterIsSignUpConstraint.secondAttribute,
+            multiplier: arrowViewCenterIsSignUpConstraint.multiplier,
+            constant: arrowViewCenterIsSignUpConstraint.constant)
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
+    }
 
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func didPushedNextButton(sender: UIButton) {
-        self.performSegueWithIdentifier("SignUp", sender: sender)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SignUp"{
-            if let view = segue.destinationViewController as? SignUpViewController{
-                if sender === self.nextButton {
-                    view.email = self.emailField.text
-                }
-                else{
-                    if let dict = sender as? [String:String]{
-                        view.email = dict["email"]
-                        view.name = dict["name"]
-                        view.fb_id = dict["fb_id"]
-                    }
-                }
-            }
-        }
-    }
+    //MARK: - サインアップ関連
     
     @IBAction func didPushedFBLoginButton(sender: UIButton) {
         getFBPermissions()
@@ -95,6 +110,107 @@ class NonLoginViewController: UIViewController {
             }
             
         })
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SignUp"{
+            if let view = segue.destinationViewController as? SignUpViewController{
+                if sender === self.emailField {
+                    view.email = self.emailField.text
+                }
+                else{
+                    if let dict = sender as? [String:String]{
+                        view.email = dict["email"]
+                        view.name = dict["name"]
+                        view.fb_id = dict["fb_id"]
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func didPushedSignUpButton(sender: UIButton) {
+        signUpView.hidden = false
+        emailField.becomeFirstResponder()
+        
+        self.view.setNeedsUpdateConstraints()
+        self.view.removeConstraint(self.arrowViewCenterIsLoginConstraint)
+        self.view.addConstraint(self.arrowViewCenterIsSignUpConstraint)
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    //MARK: - ログイン関連
+    
+    @IBAction func login(sender: UIButton) {    //実際にログインする
+        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        
+        ParseAccess().loginUser(nameField.text, password: passField.text) { (succeeded, user, error) -> Void in
+            if succeeded == true{
+                print("success!!")
+                alert.title = "ログインに成功しました"
+                self.presentViewController(alert, animated: true, completion: nil)
+                self.loginSucceeded()
+            }
+            else if error != nil {
+                if error!.domain == "InstagramAppError"{
+                    switch error!.code{
+                    case InstagramAppErrorType.NameNotInput.rawValue:
+                        alert.message = "名前が入力されていません"
+                        break
+                    case InstagramAppErrorType.PasswordNotInput.rawValue:
+                        alert.message = "パスワードが入力されていません"
+                        break
+                    default:
+                        alert.message = "不明なエラーです"
+                        break
+                    }
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                else{
+                    alert.message = "不明なエラーです"
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+            else{
+                alert.message = "不明なエラーです"
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func loginSucceeded(){
+        
+    }
+    
+    @IBAction func didPushedLoginButton(sender: UIButton) {     //ログイン画面の表示
+        signUpView.hidden = true
+        emailField.resignFirstResponder()
+        
+        self.arrowView.setNeedsUpdateConstraints()
+        self.view.removeConstraint(self.arrowViewCenterIsSignUpConstraint)
+        self.view.addConstraint(self.arrowViewCenterIsLoginConstraint)
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    //MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField === emailField{
+            self.performSegueWithIdentifier("SignUp", sender: textField)
+        }
+        else if textField === nameField{
+            passField.becomeFirstResponder()
+        }
+        else if textField === passField{
+            passField.resignFirstResponder()
+            login(loginButton)
+        }
+        return true
     }
 
     

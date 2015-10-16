@@ -31,7 +31,12 @@ class ParseAccess: NSObject {
         
         let error : NSError
         
-        if name == nil || name == "" {
+        if email == nil || email == "" {
+            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.EmailNotInput.rawValue, userInfo: nil)
+            complitionHander(succeeded: false, error: error)
+            return
+        }
+        else if name == nil || name == "" {
             error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
             complitionHander(succeeded: false, error: error)
             return
@@ -41,11 +46,7 @@ class ParseAccess: NSObject {
             complitionHander(succeeded: false, error: error)
             return
         }
-        else if email == nil || email == "" {
-            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.EmailNotInput.rawValue, userInfo: nil)
-            complitionHander(succeeded: false, error: error)
-            return
-        }
+        
         
         user.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
             if error != nil {
@@ -54,7 +55,7 @@ class ParseAccess: NSObject {
             }
             else{
                 if PFUser.currentUser() == nil {
-                    complitionHander(succeeded: true, error: error)
+                    complitionHander(succeeded: false, error: error)
                 }
                 else {
                     var dict = [String:AnyObject]()
@@ -68,8 +69,20 @@ class ParseAccess: NSObject {
         }
     }
     
-    func loginUser(name:String, password:String, complitionHander:((succeeded:Bool, user:PFUser?, error:NSError?) -> Void)?){
-        PFUser.logInWithUsernameInBackground(name, password:password) { (user, error) -> Void in
+    func loginUser(name:String?, password:String?, complitionHander:((succeeded:Bool, user:PFUser?, error:NSError?) -> Void)?){
+        let error : NSError
+        if name == nil || name == "" {
+            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
+            complitionHander?(succeeded: false, user:nil, error: error)
+            return
+        }
+        else if password == nil || password == "" {
+            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.PasswordNotInput.rawValue, userInfo: nil)
+            complitionHander?(succeeded: false, user:nil, error: error)
+            return
+        }
+        
+        PFUser.logInWithUsernameInBackground(name!, password:password!) { (user, error) -> Void in
             if error != nil {
                 print(error)
                 complitionHander?(succeeded: false, user: nil, error: error)

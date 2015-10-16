@@ -15,6 +15,11 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     var name:String?
     var fb_id:String?
     
+    var animationNow = false
+    
+    @IBOutlet weak var alertLabel: UILabel!
+    @IBOutlet weak var alertLabelTopMargin: NSLayoutConstraint!
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passField: UITextField!
@@ -22,18 +27,12 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let user = NSUserDefaults.standardUserDefaults().objectForKey("LoginUser") as? [String:String]{
-            let username = user["username"]!
-            let password = user["password"]!
-            ParseAccess().loginUser(username, password: password, complitionHander: nil)
-        }
 
         let tapGR = UITapGestureRecognizer(target: self, action: "didPushedIconImageView:")
         iconImageView.addGestureRecognizer(tapGR)
         iconImageView.layer.cornerRadius = 44
         iconImageView.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 170/255, alpha: 1.0).CGColor
-        iconImageView.layer.borderWidth = 3.0
+        iconImageView.layer.borderWidth = 1.0
         iconImageView.clipsToBounds = true
 
         emailField.text = email
@@ -59,12 +58,73 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         ParseAccess().signUpUser(nameField.text, password: passField.text, email: emailField.text, icon: icon) { (succeeded, error) -> Void in
             if succeeded == true{
                 print("success!!")
-
+                self.signUpSucceeded()
             }
             else{
+                self.alertLabelAnimation()
                 print(error)
+                if error?.domain == "InstagramAppError"{
+                    switch error!.code{
+                    case InstagramAppErrorType.NameNotInput.rawValue:
+                        self.alertLabel.text = "名前が入力されていません"
+                        break
+                    case InstagramAppErrorType.EmailNotInput.rawValue:
+                        self.alertLabel.text = "メールアドレスが入力されていません"
+                        break
+                    case InstagramAppErrorType.PasswordNotInput.rawValue:
+                        self.alertLabel.text = "パスワードが入力されていません"
+                        break
+                    default:
+                        break
+                    }
+                }
+                else{
+                    
+                }
             }
         }
+    }
+    
+    func alertLabelAnimation(){
+        if animationNow == true{
+            return
+        }
+        
+//        self.view.setNeedsUpdateConstraints()
+//        alertLabelTopMargin.constant = 0.0
+//        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+//            self.animationNow = true
+//            self.alertLabel.alpha = 1.0
+//            self.view.layoutIfNeeded()
+//            }) { (animate) -> Void in
+//                self.alertLabel.alpha = 1.0
+//        }
+//        
+//        self.view.setNeedsUpdateConstraints()
+//        alertLabelTopMargin.constant = -33.0
+//        UIView.animateWithDuration(1.0, delay: 4.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+//            self.alertLabel.alpha = 0.0
+//
+//            self.view.layoutIfNeeded()
+//            }) { (animate) -> Void in
+//                self.alertLabel.alpha = 0.0
+//                self.animationNow = false
+//        }
+//        
+        
+//        var alphaAnimation:CABasicAnimation = CABasicAnimation(keyPath: "alpha")
+//        alphaAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+//        alphaAnimation.fromValue = 0
+//        alphaAnimation.toValue = 150
+//        
+//        var marginAnimation:CABasicAnimation = CABasicAnimation(keyPath: "constant")
+//        marginAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+//        marginAnimation.fromValue = NSValue(CGSize:CGSizeMake(100, 100))
+//        marginAnimation.toValue = NSValue(CGSize:CGSizeMake(300, 300))
+    }
+    
+    func signUpSucceeded(){
+        
     }
     
     // MARK: - アイコン画像選択関連
