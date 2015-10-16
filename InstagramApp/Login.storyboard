@@ -158,7 +158,6 @@
         <!--Non Login View Controller-->
         <scene sceneID="vTM-Ub-rgH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yxU-Zv-unl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="RiU-FV-SJI" customClass="NonLoginViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8FH-xB-dhO"/>
@@ -392,6 +391,7 @@
                         <segue destination="9sZ-U6-M9Y" kind="show" identifier="SignUp" id="Ghx-iT-4jz"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yxU-Zv-unl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="373" y="70"/>
         </scene>

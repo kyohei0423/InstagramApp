@@ -97,4 +97,25 @@ class ParseAccess: NSObject {
             
         }
     }
+    
+    func resetPassword(email:String?, complitionHander:((succeeded:Bool, error:NSError?) -> Void)?){
+        let error : NSError
+        if email == nil || email == "" {
+            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
+            complitionHander?(succeeded: false, error: error)
+            return
+        }
+        
+        PFUser.requestPasswordResetForEmailInBackground(email!) { (succeeded, error) -> Void in
+            if error != nil {
+                complitionHander?(succeeded: false, error: error)
+            }
+            else if succeeded == false {
+                complitionHander?(succeeded: false, error: nil)
+            }
+            else if succeeded == true {
+                complitionHander?(succeeded: true, error: nil)
+            }
+        }
+    }
 }
