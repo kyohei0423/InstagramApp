@@ -14,8 +14,8 @@ class ChoosePhotoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.checkAuthorizationStatus()
+        self.view.backgroundColor = UIColor.lightGrayColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,14 +49,18 @@ class ChoosePhotoViewController: UIViewController {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let assets: PHFetchResult = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
         assets.enumerateObjectsUsingBlock { (asset, index, stop) -> Void in
+            
             self.photoAssets.append(asset as! PHAsset)
-            let manager = PHImageManager()
-            manager.requestImageForAsset(asset as! PHAsset, targetSize: CGSizeMake(70, 70), contentMode: .AspectFill, options: nil, resultHandler: { (image, info) -> Void in
-                //collectionViewに画像を表示させる
-                print(image)
-            })
+            
+            let frame = CGRect(x: 0, y: self.view.frame.height / 2, width: self.view.frame.width, height: self.view.frame.height / 2)
+            let layout = UICollectionViewFlowLayout()
+            let cellSize = self.view.frame.width / 3 - 10
+            layout.itemSize = CGSizeMake(cellSize, cellSize)
+            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            let userPhotosCollectionView = UserPhotosCollectionView(frame: frame, collectionViewLayout: layout)
+            userPhotosCollectionView.photoAssets = self.photoAssets
+            self.view.addSubview(userPhotosCollectionView)
         }
     }
-    
     
 }

@@ -20,6 +20,9 @@
 		E20F23F71BCF9F960077FEE4 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20F23F61BCF9F960077FEE4 /* Photos.framework */; };
 		E20F23F91BCF9FA40077FEE4 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20F23F81BCF9FA40077FEE4 /* PhotosUI.framework */; };
 		E20F23FB1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23FA1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E20F23FE1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23FD1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift */; settings = {ASSET_TAGS = (); }; };
+		E20F24011BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23FF1BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		E20F24021BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E20F24001BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		E20F23F61BCF9F960077FEE4 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		E20F23F81BCF9FA40077FEE4 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		E20F23FA1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoosePhotoViewController.swift; sourceTree = "<group>"; };
+		E20F23FD1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotosCollectionView.swift; sourceTree = "<group>"; };
+		E20F23FF1BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		E20F24001BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserPhotosCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,7 @@
 		E20F23B41BCD189F0077FEE4 /* InstagramApp */ = {
 			isa = PBXGroup;
 			children = (
+				E20F23FC1BCFC1110077FEE4 /* View */,
 				E20F23E61BCD57A20077FEE4 /* Model */,
 				E20F23E31BCD4FB00077FEE4 /* Controller */,
 				E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */,
@@ -167,6 +174,24 @@
 				E20F23F61BCF9F960077FEE4 /* Photos.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E20F23FC1BCFC1110077FEE4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E20F23FD1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift */,
+				E20F24031BCFC2060077FEE4 /* UserPhotosCollectionViewCell */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E20F24031BCFC2060077FEE4 /* UserPhotosCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E20F23FF1BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift */,
+				E20F24001BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib */,
+			);
+			name = UserPhotosCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E20F24021BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib in Resources */,
 				E20F23C01BCD189F0077FEE4 /* LaunchScreen.storyboard in Resources */,
 				E20F23BB1BCD189F0077FEE4 /* Main.storyboard in Resources */,
 				E20F23F21BCE76B20077FEE4 /* camera@2x.png in Resources */,
@@ -299,10 +325,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E20F24011BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift in Sources */,
 				E20F23F01BCE71C50077FEE4 /* TimeLineViewController.swift in Sources */,
 				E20F23B81BCD189F0077FEE4 /* ViewController.swift in Sources */,
 				E20F23FB1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift in Sources */,
 				E20F23EA1BCD65C80077FEE4 /* PostManager.swift in Sources */,
+				E20F23FE1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift in Sources */,
 				E20F23B61BCD189F0077FEE4 /* AppDelegate.swift in Sources */,
 				E20F23E81BCD630D0077FEE4 /* Post.swift in Sources */,
 			);
