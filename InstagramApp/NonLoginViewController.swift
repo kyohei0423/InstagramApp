@@ -65,7 +65,43 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     //MARK: - サインアップ関連
     
     @IBAction func didPushedFBLoginButton(sender: UIButton) {
-        getFBPermissions()
+        //getFBPermissions()
+        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        
+        ParseAccess().signUpUserWithFacebook { (user, isNew, error) -> Void in
+            if error != nil{
+                if error!.domain == "InstagramAppError" {
+                    if error!.code == InstagramAppErrorType.Canceled.rawValue {
+                        print("canceled")
+                        alert.title = "Facebookログインがキャンセルされました"
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                    else {
+                        alert.message = "不明なエラー"
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
+                else{
+                    alert.message = "不明なエラー"
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+            else if user != nil{
+                if isNew == true {
+                    print("success!!")
+                    alert.title = "新規ユーザーを作成し、ログインしました"
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.loginSucceeded()
+                }
+                else{
+                    print("success!!")
+                    alert.title = "ログインに成功しました"
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.loginSucceeded()
+                }
+            }
+        }
     }
     
     func getFBPermissions(){

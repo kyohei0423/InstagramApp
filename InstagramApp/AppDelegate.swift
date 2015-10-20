@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseFacebookUtilsV4
 import Bolts
 
 @UIApplicationMain
@@ -29,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         return FBSDKApplicationDelegate.sharedInstance()
             .application(application, didFinishLaunchingWithOptions: launchOptions)

@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+
 class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     // MARK: 前画面からの受け渡し用のプロパティ

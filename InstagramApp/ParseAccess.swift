@@ -8,11 +8,14 @@
 
 import UIKit
 import Parse
+import ParseFacebookUtilsV4
+import FBSDKCoreKit
 
 enum InstagramAppErrorType : Int{
     case NameNotInput = 0
     case PasswordNotInput
     case EmailNotInput
+    case Canceled
 }
 
 class ParseAccess: NSObject {
@@ -69,6 +72,27 @@ class ParseAccess: NSObject {
         }
     }
     
+    func signUpUserWithFacebook(complitionHander:((user:PFUser?, isNew:Bool?, error:NSError?) -> Void)?){
+        let permissions = ["user_about_me","email"]
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) -> Void in
+            if user == nil {
+                if error == nil{
+                    let canceled = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.Canceled.rawValue, userInfo: nil)
+                    complitionHander?(user: nil,isNew: nil, error: canceled)
+                }
+                else{
+                    complitionHander?(user: nil, isNew: nil, error: error)
+                }
+            }
+            else if user!.isNew {
+                complitionHander?(user: user, isNew: true, error: error)
+            }
+            else {
+                complitionHander?(user: user, isNew: false, error: error)
+            }
+        }
+    }
+
     func loginUser(name:String?, password:String?, complitionHander:((succeeded:Bool, user:PFUser?, error:NSError?) -> Void)?){
         let error : NSError
         if name == nil || name == "" {
