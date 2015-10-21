@@ -14,8 +14,8 @@ class ChoosePhotoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.checkAuthorizationStatus()
-        self.view.backgroundColor = UIColor.lightGrayColor()
+        checkAuthorizationStatus()
+        view.backgroundColor = UIColor.lightGrayColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,9 +30,9 @@ class ChoosePhotoViewController: UIViewController {
         
         switch status {
         case .Authorized:
-            self.getAllPhotosInfo()
+            getAllPhotosInfo()
         default:
-            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
+            PHPhotoLibrary.requestAuthorization({ (status) in
                 if status == .Authorized {
                     self.getAllPhotosInfo()
                 }
@@ -48,15 +48,16 @@ class ChoosePhotoViewController: UIViewController {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let assets: PHFetchResult = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
-        assets.enumerateObjectsUsingBlock { (asset, index, stop) -> Void in
+        assets.enumerateObjectsUsingBlock { (asset, index, stop) in
             
             self.photoAssets.append(asset as! PHAsset)
             
             let frame = CGRect(x: 0, y: self.view.frame.height / 2, width: self.view.frame.width, height: self.view.frame.height / 2)
             let layout = UICollectionViewFlowLayout()
-            let cellSize = self.view.frame.width / 3 - 10
+            let margine: CGFloat = 5
+            let cellSize = self.view.frame.width / 3 - margine * 2
             layout.itemSize = CGSizeMake(cellSize, cellSize)
-            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            layout.sectionInset = UIEdgeInsets(top: margine, left: margine, bottom: margine, right: margine)
             let userPhotosCollectionView = UserPhotosCollectionView(frame: frame, collectionViewLayout: layout)
             userPhotosCollectionView.photoAssets = self.photoAssets
             self.view.addSubview(userPhotosCollectionView)

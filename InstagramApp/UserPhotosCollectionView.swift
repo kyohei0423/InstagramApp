@@ -17,13 +17,13 @@ class UserPhotosCollectionView: UICollectionView, UICollectionViewDataSource, UI
         super.init(frame: frame, collectionViewLayout: layout)
         
         //デリゲート
-        self.delegate = self
-        self.dataSource = self
+        delegate = self
+        dataSource = self
         
         //セルを登録
-        self.registerNib(UINib(nibName: "UserPhotosCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UserPhotosCollectionViewCell")
+        registerNib(UINib(nibName: "UserPhotosCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UserPhotosCollectionViewCell")
         
-        self.backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.whiteColor()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -34,7 +34,7 @@ class UserPhotosCollectionView: UICollectionView, UICollectionViewDataSource, UI
         let cell = dequeueReusableCellWithReuseIdentifier("UserPhotosCollectionViewCell", forIndexPath: indexPath) as! UserPhotosCollectionViewCell
         let asset = photoAssets[indexPath.row]
         let manager = PHImageManager()
-        manager.requestImageForAsset(asset, targetSize: CGSize(width: 70, height: 70), contentMode: .AspectFill, options: nil) { (image, info) -> Void in
+        manager.requestImageForAsset(asset, targetSize: CGSize(width: 70, height: 70), contentMode: .AspectFill, options: nil) { (image, info) in
             cell.photoImage.image = image
         }
         return cell
