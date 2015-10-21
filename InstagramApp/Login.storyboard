@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -44,21 +45,21 @@
                                 <rect key="frame" x="52" y="364" width="41" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWQ-7o-3nA">
                                 <rect key="frame" x="48" y="399" width="45" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6p-eS-A9s">
                                 <rect key="frame" x="19" y="435" width="74" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yX4-Xm-gVa">
@@ -80,9 +81,9 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="scQ-9O-3A9">
-                                <rect key="frame" x="278.5" y="468" width="43" height="30"/>
+                                <rect key="frame" x="255.5" y="468" width="90" height="30"/>
                                 <animations/>
-                                <state key="normal" title="SignIn"/>
+                                <state key="normal" title="サインアップ"/>
                                 <connections>
                                     <action selector="didPushedSignInButton:" destination="9sZ-U6-M9Y" eventType="touchUpInside" id="r90-pr-P6n"/>
                                 </connections>
@@ -92,11 +93,12 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="88" id="HhL-2K-7Zt"/>
-                                    <constraint firstAttribute="height" constant="88" id="xux-K0-KqZ"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="88" id="HhL-2K-7Zt"/>
+                                    <constraint firstAttribute="width" secondItem="KpC-s8-h9Q" secondAttribute="height" multiplier="1:1" id="aUt-NG-Bff"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="88" id="xux-K0-KqZ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4aZ-5i-dPs">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4aZ-5i-dPs">
                                 <rect key="frame" x="0.0" y="31" width="600" height="33"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.34965034965034969" blue="0.3604895104895105" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -135,6 +137,7 @@
                             <constraint firstItem="rW7-gQ-h3V" firstAttribute="centerY" secondItem="RWQ-7o-3nA" secondAttribute="centerY" id="sb0-ee-rGx"/>
                             <constraint firstItem="scQ-9O-3A9" firstAttribute="centerX" secondItem="OTN-rY-eF3" secondAttribute="centerX" id="t6x-zn-xJR"/>
                             <constraint firstItem="scQ-9O-3A9" firstAttribute="top" secondItem="KUY-jU-QX2" secondAttribute="bottom" constant="8" id="utj-OI-AZt"/>
+                            <constraint firstItem="KpC-s8-h9Q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1YZ-0J-nEY" secondAttribute="bottom" id="v6c-3a-Gq1"/>
                             <constraint firstItem="RWQ-7o-3nA" firstAttribute="trailing" secondItem="iXi-j7-GJM" secondAttribute="trailing" id="v72-yG-KK1"/>
                             <constraint firstItem="yX4-Xm-gVa" firstAttribute="top" secondItem="KpC-s8-h9Q" secondAttribute="bottom" constant="16" id="z07-qQ-apT"/>
                         </constraints>
@@ -145,8 +148,10 @@
                     <connections>
                         <outlet property="alertLabel" destination="4aZ-5i-dPs" id="wrw-gc-kAD"/>
                         <outlet property="alertLabelTopMargin" destination="lKe-B1-fSW" id="Knv-7J-IQN"/>
+                        <outlet property="backImageView" destination="wKg-QN-mpm" id="3fP-Wu-75L"/>
                         <outlet property="emailField" destination="yX4-Xm-gVa" id="aWN-9F-F4C"/>
                         <outlet property="iconImageView" destination="KpC-s8-h9Q" id="Rkj-5X-AlX"/>
+                        <outlet property="iconImageViewCenterY" destination="NLQ-Xc-BTu" id="xrX-mT-Gvv"/>
                         <outlet property="nameField" destination="rW7-gQ-h3V" id="JIo-Ja-sJ8"/>
                         <outlet property="passField" destination="KUY-jU-QX2" id="sIV-qH-0xP"/>
                     </connections>
@@ -208,12 +213,20 @@
                                             <constraint firstAttribute="height" constant="1" id="x0Z-cI-DLu"/>
                                         </constraints>
                                     </view>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l30-2H-fdC">
-                                        <rect key="frame" x="281" y="281" width="38" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l30-2H-fdC">
+                                        <rect key="frame" x="192" y="281" width="217" height="30"/>
                                         <animations/>
-                                        <state key="normal" title="Login"/>
+                                        <state key="normal" title="Facebookアカウントでログイン"/>
                                         <connections>
-                                            <action selector="login:" destination="RiU-FV-SJI" eventType="touchUpInside" id="RPo-Fj-IJM"/>
+                                            <action selector="loginWithFacebook:" destination="RiU-FV-SJI" eventType="touchUpInside" id="HkE-Ei-LkR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25H-gc-klV">
+                                        <rect key="frame" x="270" y="102" width="60" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="ログイン"/>
+                                        <connections>
+                                            <action selector="login:" destination="RiU-FV-SJI" eventType="touchUpInside" id="Y51-Wk-RRz"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -228,6 +241,8 @@
                                     <constraint firstAttribute="trailing" secondItem="pAK-a2-m7w" secondAttribute="trailing" constant="8" id="DQT-lt-VTz"/>
                                     <constraint firstAttribute="trailing" secondItem="A9M-UQ-aYh" secondAttribute="trailing" constant="8" id="JcE-jj-AJa"/>
                                     <constraint firstAttribute="bottom" secondItem="l30-2H-fdC" secondAttribute="bottom" constant="8" id="L1f-ZQ-sf3"/>
+                                    <constraint firstItem="25H-gc-klV" firstAttribute="top" secondItem="A9M-UQ-aYh" secondAttribute="bottom" constant="8" id="Pq7-Ym-SZ6"/>
+                                    <constraint firstItem="25H-gc-klV" firstAttribute="centerX" secondItem="8aR-1G-Ouj" secondAttribute="centerX" id="SDX-cI-muX"/>
                                     <constraint firstItem="YUL-hB-cbI" firstAttribute="leading" secondItem="8aR-1G-Ouj" secondAttribute="leading" constant="8" id="UG9-ew-XTI"/>
                                     <constraint firstAttribute="trailing" secondItem="mvg-Fs-3Ko" secondAttribute="trailing" constant="8" id="aUa-DR-RGt"/>
                                     <constraint firstItem="mvg-Fs-3Ko" firstAttribute="top" secondItem="pAK-a2-m7w" secondAttribute="bottom" constant="8" id="cRG-R4-7LY"/>
@@ -249,15 +264,15 @@
                                         <rect key="frame" x="292" y="41" width="16" height="20.5"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-DU-tWa">
-                                        <rect key="frame" x="235" y="69" width="131" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-DU-tWa">
+                                        <rect key="frame" x="178" y="69" width="247" height="30"/>
                                         <animations/>
-                                        <state key="normal" title="Login for Facebook"/>
+                                        <state key="normal" title="Facebookアカウントでサインアップ"/>
                                         <connections>
-                                            <action selector="didPushedFBLoginButton:" destination="RiU-FV-SJI" eventType="touchUpInside" id="Ugq-eB-5fW"/>
+                                            <action selector="didPushedFBSignUpButton:" destination="RiU-FV-SJI" eventType="touchUpInside" id="Ybq-aP-D6o"/>
                                         </connections>
                                     </button>
                                 </subviews>

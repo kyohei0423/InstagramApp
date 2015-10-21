@@ -20,18 +20,6 @@ enum InstagramAppErrorType : Int{
 
 class ParseAccess: NSObject {
     func signUpUser(name:String?, password:String?, email:String?, icon:UIImage?, complitionHander:(succeeded:Bool, error:NSError?) -> Void){
-        let user = PFUser()
-        
-        user.username = name
-        user.password = password
-        user.email = email
-        
-        if icon != nil{
-            let data = UIImageJPEGRepresentation(icon!, 0.95)
-            let file = PFFile(data: data!, contentType: "jpeg")
-            user["icon"] = file
-        }
-        
         let error : NSError
         
         if email == nil || email == "" {
@@ -50,6 +38,17 @@ class ParseAccess: NSObject {
             return
         }
         
+        let user = PFUser()
+        
+        user.username = name
+        user.password = password
+        user.email = email
+        
+        if icon != nil{
+            let data = UIImageJPEGRepresentation(icon!, 0.95)
+            let file = PFFile(data: data!, contentType: "jpeg")
+            user["icon"] = file
+        }
         
         user.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
             if error != nil {
@@ -72,7 +71,7 @@ class ParseAccess: NSObject {
         }
     }
     
-    func signUpUserWithFacebook(complitionHander:((user:PFUser?, isNew:Bool?, error:NSError?) -> Void)?){
+    func loginUserWithFacebook(complitionHander:((user:PFUser?, isNew:Bool?, error:NSError?) -> Void)?){
         let permissions = ["user_about_me","email"]
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) -> Void in
             if user == nil {

@@ -9,8 +9,8 @@
 import UIKit
 import Parse
 
-class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-
+class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate {
+    
     // MARK: 前画面からの受け渡し用のプロパティ
     var email:String?
     var name:String?
@@ -19,25 +19,48 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     var animationNow = false
     
     @IBOutlet weak var alertLabel: UILabel!
-    @IBOutlet weak var alertLabelTopMargin: NSLayoutConstraint!
+    @IBOutlet var alertLabelTopMargin: NSLayoutConstraint!
+    var alertLabelTopMarginZero: NSLayoutConstraint!
     
+    @IBOutlet var iconImageViewCenterY: NSLayoutConstraint!
+    var iconImageViewMovedCenterY: NSLayoutConstraint?
+
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var iconImageView: UIImageView!
-
+    @IBOutlet weak var backImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let tapGR = UITapGestureRecognizer(target: self, action: "didPushedIconImageView:")
         iconImageView.addGestureRecognizer(tapGR)
         iconImageView.layer.cornerRadius = 44
         iconImageView.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 170/255, alpha: 1.0).CGColor
         iconImageView.layer.borderWidth = 1.0
         iconImageView.clipsToBounds = true
-
+        
+        backImageView.clipsToBounds = true
+        
         emailField.text = email
         nameField.text = name
+        
+        emailField.delegate = self
+        nameField.delegate = self
+        passField.delegate = self
+        
+        alertLabelTopMarginZero = NSLayoutConstraint(item: alertLabelTopMargin.firstItem,
+            attribute: alertLabelTopMargin.firstAttribute,
+            relatedBy: alertLabelTopMargin.relation,
+            toItem: alertLabelTopMargin.secondItem,
+            attribute: alertLabelTopMargin.secondAttribute,
+            multiplier: alertLabelTopMargin.multiplier,
+            constant: 0.0)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        
         if fb_id != nil{
             self.iconImageView.getUrlImageAsynchronous("https://graph.facebook.com/\(fb_id!)/picture?width=200&height=200", complitionHander: nil)
         }
@@ -46,7 +69,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -79,8 +102,24 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                         break
                     }
                 }
+                else if error?.domain == "Parse"{
+                    switch error!.code{
+                    case PFErrorCode.ErrorInvalidEmailAddress.rawValue:
+                        self.alertLabel.text = "メールアドレスが不正です"
+                        break
+                    case PFErrorCode.ErrorUsernameTaken.rawValue:
+                        self.alertLabel.text = "すでに同じ名前のユーザーが存在します"
+                        break
+                    case PFErrorCode.ErrorUserEmailTaken.rawValue:
+                        self.alertLabel.text = "すでに同じメールアドレスのユーザーが存在します"
+                        break
+                    default:
+                        self.alertLabel.text = "不明なエラーです"
+                        break
+                    }
+                }
                 else{
-                    
+                    self.alertLabel.text = "不明なエラーです"
                 }
             }
         }
@@ -91,37 +130,26 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
             return
         }
         
-//        self.view.setNeedsUpdateConstraints()
-//        alertLabelTopMargin.constant = 0.0
-//        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-//            self.animationNow = true
-//            self.alertLabel.alpha = 1.0
-//            self.view.layoutIfNeeded()
-//            }) { (animate) -> Void in
-//                self.alertLabel.alpha = 1.0
-//        }
-//        
-//        self.view.setNeedsUpdateConstraints()
-//        alertLabelTopMargin.constant = -33.0
-//        UIView.animateWithDuration(1.0, delay: 4.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-//            self.alertLabel.alpha = 0.0
-//
-//            self.view.layoutIfNeeded()
-//            }) { (animate) -> Void in
-//                self.alertLabel.alpha = 0.0
-//                self.animationNow = false
-//        }
-//        
-        
-//        var alphaAnimation:CABasicAnimation = CABasicAnimation(keyPath: "alpha")
-//        alphaAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-//        alphaAnimation.fromValue = 0
-//        alphaAnimation.toValue = 150
-//        
-//        var marginAnimation:CABasicAnimation = CABasicAnimation(keyPath: "constant")
-//        marginAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-//        marginAnimation.fromValue = NSValue(CGSize:CGSizeMake(100, 100))
-//        marginAnimation.toValue = NSValue(CGSize:CGSizeMake(300, 300))
+        self.view.setNeedsUpdateConstraints()
+        self.view.removeConstraint(alertLabelTopMargin)
+        self.view.addConstraint(alertLabelTopMarginZero)
+        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.animationNow = true
+            self.alertLabel.alpha = 1.0
+            self.view.layoutIfNeeded()
+            }) { (animate) -> Void in
+                self.alertLabel.alpha = 1.0
+                self.view.removeConstraint(self.alertLabelTopMarginZero)
+                self.view.addConstraint(self.alertLabelTopMargin)
+                UIView.animateWithDuration(1.0, delay: 3.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                    self.animationNow = true
+                    self.alertLabel.alpha = 0.0
+                    self.view.layoutIfNeeded()
+                    }) { (animate) -> Void in
+                        self.alertLabel.alpha = 0.0
+                        self.animationNow = false
+                }
+        }
     }
     
     func signUpSucceeded(){
@@ -143,7 +171,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         //TODO: シミュレータではカメラを動かせないので動作未検証
         /*
         actionSheet.addAction(UIAlertAction(title: "写真を撮る", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            self.launchCamera()
+        self.launchCamera()
         }))
         */
         
@@ -230,7 +258,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         picker.sourceType = UIImagePickerControllerSourceType.Camera
         self.presentViewController(picker, animated: true, completion: nil)
     }
-
+    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if info[UIImagePickerControllerOriginalImage] == nil {
@@ -244,15 +272,69 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
+    func keyboardDidShow(sender:NSNotification){
+        let keyboardFrameEnd = sender.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue
+        print(keyboardFrameEnd)
+        if let height = keyboardFrameEnd?.height{
+            self.view.setNeedsUpdateConstraints()
+            
+            self.view.removeConstraint(iconImageViewCenterY)
+            if iconImageViewMovedCenterY != nil{
+                self.view.removeConstraint(iconImageViewMovedCenterY!)
+            }
+            
+            iconImageViewMovedCenterY = NSLayoutConstraint(item: iconImageViewCenterY.firstItem,
+                attribute: iconImageViewCenterY.firstAttribute,
+                relatedBy: iconImageViewCenterY.relation,
+                toItem: iconImageViewCenterY.secondItem,
+                attribute: iconImageViewCenterY.secondAttribute,
+                multiplier: iconImageViewCenterY.multiplier,
+                constant: -height)
+            
+            self.view.addConstraint(iconImageViewMovedCenterY!)
+            
+            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+                self.iconImageView.layer.cornerRadius = self.iconImageView.frame.width / 2
+            },completion:nil)
+        }
+    }
+    
+    func keyboardWillHide(sender:NSNotification){
+        self.view.setNeedsUpdateConstraints()
+        if iconImageViewMovedCenterY != nil {
+            self.view.removeConstraint(iconImageViewMovedCenterY!)
+            self.view.addConstraint(iconImageViewCenterY!)
+        }
+        self.view.layoutIfNeeded()
+    }
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField === emailField {
+            //textField.resignFirstResponder()
+            nameField.becomeFirstResponder()
+        }
+        else if textField === nameField {
+            //textField.resignFirstResponder()
+            passField.becomeFirstResponder()
+        }
+        else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
