@@ -23,6 +23,7 @@
 		E20F23FE1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23FD1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift */; settings = {ASSET_TAGS = (); }; };
 		E20F24011BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20F23FF1BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		E20F24021BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E20F24001BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		E2F5F4F41BD8D42D002806EE /* SelectedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F5F4F31BD8D42D002806EE /* SelectedImageView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		E20F23FD1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotosCollectionView.swift; sourceTree = "<group>"; };
 		E20F23FF1BCFC2010077FEE4 /* UserPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		E20F24001BCFC2010077FEE4 /* UserPhotosCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserPhotosCollectionViewCell.xib; sourceTree = "<group>"; };
+		E2F5F4F31BD8D42D002806EE /* SelectedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 			children = (
 				E20F23FD1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift */,
 				E20F24031BCFC2060077FEE4 /* UserPhotosCollectionViewCell */,
+				E2F5F4F31BD8D42D002806EE /* SelectedImageView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				E20F23EA1BCD65C80077FEE4 /* PostManager.swift in Sources */,
 				E20F23FE1BCFC16F0077FEE4 /* UserPhotosCollectionView.swift in Sources */,
 				E20F23B61BCD189F0077FEE4 /* AppDelegate.swift in Sources */,
+				E2F5F4F41BD8D42D002806EE /* SelectedImageView.swift in Sources */,
 				E20F23E81BCD630D0077FEE4 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,6 +561,7 @@
 				E20F23DC1BCD189F0077FEE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E20F23DD1BCD189F0077FEE4 /* Build configuration list for PBXNativeTarget "InstagramAppTests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +570,7 @@
 				E20F23DF1BCD189F0077FEE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E20F23E01BCD189F0077FEE4 /* Build configuration list for PBXNativeTarget "InstagramAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -573,6 +579,7 @@
 				E20F23E21BCD189F0077FEE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

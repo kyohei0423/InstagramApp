@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class ChoosePhotoViewController: UIViewController {
+class ChoosePhotoViewController: UIViewController, UserPhotoCollectionViewDelegate {
     var photoAssets = [PHAsset]()
 
     override func viewDidLoad() {
@@ -52,16 +52,25 @@ class ChoosePhotoViewController: UIViewController {
             
             self.photoAssets.append(asset as! PHAsset)
             
-            let frame = CGRect(x: 0, y: self.view.frame.height / 2, width: self.view.frame.width, height: self.view.frame.height / 2)
+            let frame = CGRect(x: 0, y: self.view.frame.height / 2 - (self.tabBarController?.tabBar.frame.height)!, width: self.view.frame.width, height: self.view.frame.height / 2  - (self.tabBarController?.tabBar.frame.height)! - 15)
             let layout = UICollectionViewFlowLayout()
             let margine: CGFloat = 5
             let cellSize = self.view.frame.width / 3 - margine * 2
             layout.itemSize = CGSizeMake(cellSize, cellSize)
             layout.sectionInset = UIEdgeInsets(top: margine, left: margine, bottom: margine, right: margine)
             let userPhotosCollectionView = UserPhotosCollectionView(frame: frame, collectionViewLayout: layout)
+            userPhotosCollectionView.cusutomDelegate = self
             userPhotosCollectionView.photoAssets = self.photoAssets
             self.view.addSubview(userPhotosCollectionView)
         }
+    }
+    
+    func showSelectedPhoto(image: UIImage) {
+        let margine: CGFloat = 20
+        let imageFrame = CGRectMake(margine, margine, view.frame.width - margine * 2, view.frame.height / 2 - margine * 2)
+        let selectedImage = SelectedImageView(frame: imageFrame)
+        selectedImage.image = image
+        view.addSubview(selectedImage)
     }
     
 }

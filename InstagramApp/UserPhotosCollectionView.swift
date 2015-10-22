@@ -9,8 +9,16 @@
 import UIKit
 import Photos
 
+
+@objc protocol UserPhotoCollectionViewDelegate {
+    func showSelectedPhoto(image: UIImage)
+}
+
 class UserPhotosCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var photoAssets = [PHAsset]()
+    var photos = [UIImage]()
+    
+    weak var cusutomDelegate: UserPhotoCollectionViewDelegate?
     
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -34,16 +42,21 @@ class UserPhotosCollectionView: UICollectionView, UICollectionViewDataSource, UI
         let cell = dequeueReusableCellWithReuseIdentifier("UserPhotosCollectionViewCell", forIndexPath: indexPath) as! UserPhotosCollectionViewCell
         let asset = photoAssets[indexPath.row]
         let manager = PHImageManager()
-        manager.requestImageForAsset(asset, targetSize: CGSize(width: 70, height: 70), contentMode: .AspectFill, options: nil) { (image, info) in
+        manager.requestImageForAsset(asset, targetSize: CGSize(width: 500, height: 500), contentMode: .AspectFill, options: nil) { (image, info) in
             cell.photoImage.image = image
+            self.photos.append(image!)
         }
         return cell
     }
     
-    //呼ばれている
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoAssets.count
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! UserPhotosCollectionViewCell
+        cusutomDelegate?.showSelectedPhoto(selectedCell.photoImage.image!)
+    }
     
 }
