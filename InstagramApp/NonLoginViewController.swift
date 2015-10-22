@@ -185,9 +185,9 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
         
         ParseAccess().loginUserWithFacebook { (user, isNew, error) in
-            if error != nil{
-                if error!.domain == "InstagramAppError" {
-                    if error!.code == InstagramAppErrorType.Canceled.rawValue {
+            if let _error = error {
+                if _error.domain == "InstagramAppError" {
+                    if _error.code == InstagramAppErrorType.Canceled.rawValue {
                         print("canceled")
                         alert.title = "Facebookログインがキャンセルされました"
                         self.presentViewController(alert, animated: true, completion: nil)
