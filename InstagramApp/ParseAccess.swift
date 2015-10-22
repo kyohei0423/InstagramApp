@@ -50,7 +50,7 @@ class ParseAccess: NSObject {
             user["icon"] = file
         }
         
-        user.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
+        user.signUpInBackgroundWithBlock { (succeeded, error) in
             if error != nil {
                 complitionHander(succeeded: false, error: error)
                 return
@@ -73,7 +73,7 @@ class ParseAccess: NSObject {
     
     func loginUserWithFacebook(complitionHander:((user:PFUser?, isNew:Bool?, error:NSError?) -> Void)?){
         let permissions = ["user_about_me","email"]
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) -> Void in
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) in
             if user == nil {
                 if error == nil{
                     let canceled = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.Canceled.rawValue, userInfo: nil)
@@ -105,7 +105,7 @@ class ParseAccess: NSObject {
             return
         }
         
-        PFUser.logInWithUsernameInBackground(name!, password:password!) { (user, error) -> Void in
+        PFUser.logInWithUsernameInBackground(name!, password:password!) { (user, error) in
             if error != nil {
                 print(error)
                 complitionHander?(succeeded: false, user: nil, error: error)
@@ -129,14 +129,14 @@ class ParseAccess: NSObject {
             return
         }
         
-        PFUser.requestPasswordResetForEmailInBackground(email!) { (succeeded, error) -> Void in
+        PFUser.requestPasswordResetForEmailInBackground(email!) { (succeeded, error) in
             if error != nil {
                 complitionHander?(succeeded: false, error: error)
             }
-            else if succeeded == false {
+            else if !succeeded {
                 complitionHander?(succeeded: false, error: nil)
             }
-            else if succeeded == true {
+            else if succeeded  {
                 complitionHander?(succeeded: true, error: nil)
             }
         }

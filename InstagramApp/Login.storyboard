@@ -267,8 +267,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-DU-tWa">
-                                        <rect key="frame" x="178" y="69" width="247" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-DU-tWa">
+                                        <rect key="frame" x="176.5" y="69" width="247" height="30"/>
                                         <animations/>
                                         <state key="normal" title="Facebookアカウントでサインアップ"/>
                                         <connections>
@@ -339,11 +339,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InstagramApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JuL-Yb-PrH">
-                                <rect key="frame" x="42" y="58" width="516" height="105.5"/>
+                                <rect key="frame" x="42" y="57" width="516" height="106.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="BodoniSvtyTwoSCITCTT-Book" family="Bodoni 72 Smallcaps" pointSize="88"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGo-Fw-s9H" customClass="TriangleView" customModule="InstagramApp" customModuleProvider="target">
                                 <rect key="frame" x="162" y="265" width="32" height="16"/>

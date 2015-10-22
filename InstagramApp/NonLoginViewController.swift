@@ -70,12 +70,12 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     
     func getFBPermissions(){
         let login = FBSDKLoginManager()
-        login.logInWithReadPermissions(["public_profile","email"], fromViewController: self) { (result, error) -> Void in
+        login.logInWithReadPermissions(["public_profile","email"], fromViewController: self) { (result, error) in
             if error != nil{
                 print(error)
                 return
             }
-            else if result.isCancelled == true{
+            else if result.isCancelled {
                 print("Cancelled")
             }
             else{
@@ -88,7 +88,7 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     
     func getUerDateForFB(){
         let request=FBSDKGraphRequest(graphPath: "/me?fields=first_name,last_name,email", parameters: nil, HTTPMethod: "GET")
-        request.startWithCompletionHandler({ (connection, result, error) -> Void in
+        request.startWithCompletionHandler({ (connection, result, error) in
             if(error != nil){
                 print(error)
                 return
@@ -132,10 +132,10 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     @IBAction func didPushedSignUpButton(sender: UIButton) {
         signUpView.hidden = false
         
-        self.view.setNeedsUpdateConstraints()
-        self.view.removeConstraint(self.arrowViewCenterIsLoginConstraint)
-        self.view.addConstraint(self.arrowViewCenterIsSignUpConstraint)
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        view.setNeedsUpdateConstraints()
+        view.removeConstraint(self.arrowViewCenterIsLoginConstraint)
+        view.addConstraint(self.arrowViewCenterIsSignUpConstraint)
+        UIView.animateWithDuration(0.3, animations: { () in
             self.view.layoutIfNeeded()
         })
     }
@@ -146,8 +146,8 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
         
-        ParseAccess().loginUser(nameField.text, password: passField.text) { (succeeded, user, error) -> Void in
-            if succeeded == true{
+        ParseAccess().loginUser(nameField.text, password: passField.text) { (succeeded, user, error) in
+            if succeeded {
                 print("success!!")
                 alert.title = "ログインに成功しました"
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -184,7 +184,7 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
         
-        ParseAccess().loginUserWithFacebook { (user, isNew, error) -> Void in
+        ParseAccess().loginUserWithFacebook { (user, isNew, error) in
             if error != nil{
                 if error!.domain == "InstagramAppError" {
                     if error!.code == InstagramAppErrorType.Canceled.rawValue {
@@ -228,9 +228,9 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         emailField.resignFirstResponder()
         
         self.arrowView.setNeedsUpdateConstraints()
-        self.view.removeConstraint(self.arrowViewCenterIsSignUpConstraint)
-        self.view.addConstraint(self.arrowViewCenterIsLoginConstraint)
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        view.removeConstraint(self.arrowViewCenterIsSignUpConstraint)
+        view.addConstraint(self.arrowViewCenterIsLoginConstraint)
+        UIView.animateWithDuration(0.3, animations: { () in
             self.view.layoutIfNeeded()
         })
     }

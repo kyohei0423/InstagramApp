@@ -24,7 +24,7 @@ extension UIImageView{
             }
             
             if let image = UIImage(data:data!){
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                dispatch_async(dispatch_get_main_queue(), { () in
                     self.image=image
                     complitionHander?(succeeded: true, error: nil)
                 })

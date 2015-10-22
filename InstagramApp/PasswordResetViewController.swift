@@ -29,8 +29,8 @@ class PasswordResetViewController: UIViewController {
         let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
         
-        ParseAccess().resetPassword(emailField.text) { (succeeded, error) -> Void in
-            if succeeded == true{
+        ParseAccess().resetPassword(emailField.text) { (succeeded, error) in
+            if succeeded {
                 print("success!!")
                 alert.title = "パスワードをリセットしました"
                 alert.message = "メールに記載されている\nURLから再設定を行ってください"

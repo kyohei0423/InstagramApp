@@ -79,8 +79,8 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     @IBAction func didPushedSignInButton(sender: AnyObject) {
         let icon = iconImageView.image
         
-        ParseAccess().signUpUser(nameField.text, password: passField.text, email: emailField.text, icon: icon) { (succeeded, error) -> Void in
-            if succeeded == true{
+        ParseAccess().signUpUser(nameField.text, password: passField.text, email: emailField.text, icon: icon) { (succeeded, error) in
+            if succeeded {
                 print("success!!")
                 self.signUpSucceeded()
             }
@@ -126,26 +126,26 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     }
     
     func alertLabelAnimation(){
-        if animationNow == true{
+        if animationNow {
             return
         }
         
-        self.view.setNeedsUpdateConstraints()
-        self.view.removeConstraint(alertLabelTopMargin)
-        self.view.addConstraint(alertLabelTopMarginZero)
-        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        view.setNeedsUpdateConstraints()
+        view.removeConstraint(alertLabelTopMargin)
+        view.addConstraint(alertLabelTopMarginZero)
+        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () in
             self.animationNow = true
             self.alertLabel.alpha = 1.0
             self.view.layoutIfNeeded()
-            }) { (animate) -> Void in
+            }) { (animate) in
                 self.alertLabel.alpha = 1.0
                 self.view.removeConstraint(self.alertLabelTopMarginZero)
                 self.view.addConstraint(self.alertLabelTopMargin)
-                UIView.animateWithDuration(1.0, delay: 3.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                UIView.animateWithDuration(1.0, delay: 3.0, options: UIViewAnimationOptions.CurveLinear, animations: { () in
                     self.animationNow = true
                     self.alertLabel.alpha = 0.0
                     self.view.layoutIfNeeded()
-                    }) { (animate) -> Void in
+                    }) { (animate) in
                         self.alertLabel.alpha = 0.0
                         self.animationNow = false
                 }
@@ -163,23 +163,23 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         
         actionSheet.addAction(UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: nil))
         
-        actionSheet.addAction(UIAlertAction(title: "Facebookからインポート", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Facebookからインポート", style: UIAlertActionStyle.Default, handler: { (action) in
             self.loadIconForFacebook()
         }))
         
         
         //TODO: シミュレータではカメラを動かせないので動作未検証
         /*
-        actionSheet.addAction(UIAlertAction(title: "写真を撮る", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "写真を撮る", style: UIAlertActionStyle.Default, handler: { (action) in
         self.launchCamera()
         }))
         */
         
-        actionSheet.addAction(UIAlertAction(title: "ライブラリから選択", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "ライブラリから選択", style: UIAlertActionStyle.Default, handler: { (action) in
             self.openCameraLibrary()
         }))
         
-        presentViewController(actionSheet, animated: true) { () -> Void in
+        presentViewController(actionSheet, animated: true) { () in
             
         }
     }
@@ -192,12 +192,12 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     func getFBPermissions(){
         let login = FBSDKLoginManager()
-        login.logInWithReadPermissions(["public_profile","email"], fromViewController: self) { (result, error) -> Void in
-            if error != nil{
+        login.logInWithReadPermissions(["public_profile","email"], fromViewController: self) { (result, error) in
+            if error != nil {
                 print(error)
                 return
             }
-            else if result.isCancelled == true{
+            else if result.isCancelled {
                 print("Cancelled")
             }
             else{
@@ -213,7 +213,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
         
         let request=FBSDKGraphRequest(graphPath: "/me", parameters: [:], HTTPMethod: "GET")
-        request.startWithCompletionHandler({ (connection, result, error) -> Void in
+        request.startWithCompletionHandler({ (connection, result, error) in
             if(error != nil){
                 print(error)
                 alert.message = "Facebookからユーザ情報を取得できませんでした"
@@ -222,8 +222,8 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
             }
             else if(result != nil){
                 if let id = result.valueForKey("id") as? String{
-                    self.iconImageView.getUrlImageAsynchronous("https://graph.facebook.com/\(id)/picture?width=200&height=200", complitionHander: { (succeeded, error) -> Void in
-                        if succeeded == false{
+                    self.iconImageView.getUrlImageAsynchronous("https://graph.facebook.com/\(id)/picture?width=200&height=200", complitionHander: { (succeeded, error) in
+                        if !succeeded {
                             if error != nil{
                                 alert.message = "画像を取得できませんでした"
                             }
@@ -266,7 +266,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         }
         else{
             let image:UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () in
                 self.iconImageView.image = image
             })
         }
@@ -277,11 +277,11 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         let keyboardFrameEnd = sender.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue
         print(keyboardFrameEnd)
         if let height = keyboardFrameEnd?.height{
-            self.view.setNeedsUpdateConstraints()
+            view.setNeedsUpdateConstraints()
             
-            self.view.removeConstraint(iconImageViewCenterY)
+            view.removeConstraint(iconImageViewCenterY)
             if iconImageViewMovedCenterY != nil{
-                self.view.removeConstraint(iconImageViewMovedCenterY!)
+                view.removeConstraint(iconImageViewMovedCenterY!)
             }
             
             iconImageViewMovedCenterY = NSLayoutConstraint(item: iconImageViewCenterY.firstItem,
@@ -292,9 +292,9 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                 multiplier: iconImageViewCenterY.multiplier,
                 constant: -height)
             
-            self.view.addConstraint(iconImageViewMovedCenterY!)
+            view.addConstraint(iconImageViewMovedCenterY!)
             
-            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () in
                 self.view.layoutIfNeeded()
                 self.iconImageView.layer.cornerRadius = self.iconImageView.frame.width / 2
             },completion:nil)
@@ -302,12 +302,12 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     }
     
     func keyboardWillHide(sender:NSNotification){
-        self.view.setNeedsUpdateConstraints()
+        view.setNeedsUpdateConstraints()
         if iconImageViewMovedCenterY != nil {
-            self.view.removeConstraint(iconImageViewMovedCenterY!)
-            self.view.addConstraint(iconImageViewCenterY!)
+            view.removeConstraint(iconImageViewMovedCenterY!)
+            view.addConstraint(iconImageViewCenterY!)
         }
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
     }
     
     // MARK: - UITextFieldDelegate
