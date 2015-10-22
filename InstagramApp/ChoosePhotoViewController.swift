@@ -49,9 +49,7 @@ class ChoosePhotoViewController: UIViewController, UserPhotoCollectionViewDelega
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let assets: PHFetchResult = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
         assets.enumerateObjectsUsingBlock { (asset, index, stop) in
-            
             self.photoAssets.append(asset as! PHAsset)
-            
             let frame = CGRect(x: 0, y: self.view.frame.height / 2 - (self.tabBarController?.tabBar.frame.height)!, width: self.view.frame.width, height: self.view.frame.height / 2  - (self.tabBarController?.tabBar.frame.height)! - 15)
             let layout = UICollectionViewFlowLayout()
             let margine: CGFloat = 5
