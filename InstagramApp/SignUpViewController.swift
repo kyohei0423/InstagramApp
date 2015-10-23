@@ -153,7 +153,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     }
     
     func signUpSucceeded(){
-        
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - アイコン画像選択関連

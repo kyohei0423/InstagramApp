@@ -205,15 +205,15 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
             else if user != nil{
                 if isNew == true {
                     print("success!!")
+                    self.loginSucceeded()
                     alert.title = "新規ユーザーを作成し、ログインしました"
                     self.presentViewController(alert, animated: true, completion: nil)
-                    self.loginSucceeded()
                 }
                 else{
                     print("success!!")
+                    self.loginSucceeded()
                     alert.title = "ログインに成功しました"
                     self.presentViewController(alert, animated: true, completion: nil)
-                    self.loginSucceeded()
                 }
             }
         }
@@ -221,6 +221,7 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     
     func loginSucceeded(){
         print("loginSucceeded")
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func didPushedLoginButton(sender: UIButton) {     //ログイン画面の表示
