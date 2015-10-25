@@ -24,4 +24,35 @@ class PhotoManager: NSObject, UICollectionViewDataSource {
         cell.layer.borderColor = UIColor.whiteColor().CGColor
         return cell
     }
+    
+    //フォトライブラリへのアクセス許可を求める
+    func checkAuthorizationStatus() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        switch status {
+        case .Authorized:
+            getAllPhotosInfo()
+        default:
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                if status == .Authorized {
+                    self.getAllPhotosInfo()
+                }
+            })
+        }
+    }
+    
+    //フォトライブラリから全ての写真のPHAssetオブジェクトを取得する
+    func getAllPhotosInfo() {
+        //ソート条件を指定
+        let options = PHFetchOptions()
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let assets: PHFetchResult = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
+        assets.enumerateObjectsUsingBlock { (asset, index, stop) in
+            let manager = PHImageManager()
+            manager.requestImageForAsset(asset as! PHAsset, targetSize: CGSize(width: 1000, height: 1000), contentMode: .AspectFill, options: nil) { (image, info) in
+                self.photoAssets.append(image!)
+            }
+        }
+    }
 }

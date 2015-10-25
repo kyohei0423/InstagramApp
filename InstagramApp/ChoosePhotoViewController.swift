@@ -18,9 +18,8 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkAuthorizationStatus()
-        
         photoCollectionView.customDelegate = self
+        photoManager.checkAuthorizationStatus()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,37 +35,6 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         selectedImageView.image = photoManager.photoAssets[0]
-    }
-    
-    //フォトライブラリへのアクセス許可を求める
-    private func checkAuthorizationStatus() {
-        let status = PHPhotoLibrary.authorizationStatus()
-        
-        switch status {
-        case .Authorized:
-            getAllPhotosInfo()
-        default:
-            PHPhotoLibrary.requestAuthorization({ (status) in
-                if status == .Authorized {
-                    self.getAllPhotosInfo()
-                }
-            })
-        }
-    }
-    
-    //フォトライブラリから全ての写真のPHAssetオブジェクトを取得する
-    func getAllPhotosInfo() {
-        //ソート条件を指定
-        let options = PHFetchOptions()
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        let assets: PHFetchResult = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
-        assets.enumerateObjectsUsingBlock { (asset, index, stop) in
-            let manager = PHImageManager()
-            manager.requestImageForAsset(asset as! PHAsset, targetSize: CGSize(width: 1000, height: 1000), contentMode: .AspectFill, options: nil) { (image, info) in
-                self.photoManager.photoAssets.append(image!)
-            }
-        }
     }
     
     func selectedCellImage(image: UIImage) {
