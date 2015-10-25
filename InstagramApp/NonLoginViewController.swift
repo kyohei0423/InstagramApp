@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class NonLoginViewController: UIViewController,UITextFieldDelegate {
 
@@ -143,7 +144,7 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     //MARK: - ログイン関連
     
     @IBAction func login(sender: UIButton) {    //実際にログインする
-        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         ParseAccess().loginUser(nameField.text, password: passField.text) { (succeeded, user, error) in
@@ -181,7 +182,7 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func loginWithFacebook(sender: UIButton) {    //実際にログインする
-        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         ParseAccess().loginUserWithFacebook { (user, isNew, error) in

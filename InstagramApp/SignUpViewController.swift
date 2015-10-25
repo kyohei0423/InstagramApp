@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import AlamofireImage
 import Parse
+import FBSDKLoginKit
 
 class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate {
     
@@ -62,7 +64,9 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
         if fb_id != nil{
-            self.iconImageView.getUrlImageAsynchronous("https://graph.facebook.com/\(fb_id!)/picture?width=200&height=200", complitionHander: nil)
+            self.iconImageView.af_setImageWithURL(NSURL(string: "https://graph.facebook.com/\(fb_id!)/picture?width=200&height=200")!,
+                placeholderImage: nil, filter: nil,
+                imageTransition: UIImageView.ImageTransition.CrossDissolve(0.5))
         }
     }
     
@@ -159,7 +163,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     // MARK: - アイコン画像選択関連
     
     func didPushedIconImageView(sender:UITapGestureRecognizer){
-        let actionSheet = UIAlertController(title: "プロフィール写真を変更", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let actionSheet = UIAlertController(title: "プロフィール写真を変更", message: nil, preferredStyle: .ActionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "キャンセル", style: .Cancel, handler: nil))
         
@@ -209,7 +213,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     }
     
     func getUerDateForFB(){
-        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         let request=FBSDKGraphRequest(graphPath: "/me", parameters: [:], HTTPMethod: "GET")
@@ -221,18 +225,10 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                 return
             }
             else if(result != nil){
-                if let id = result.valueForKey("id") as? String{
-                    self.iconImageView.getUrlImageAsynchronous("https://graph.facebook.com/\(id)/picture?width=200&height=200", complitionHander: { (succeeded, error) in
-                        if !succeeded {
-                            if error != nil{
-                                alert.message = "画像を取得できませんでした"
-                            }
-                            else{
-                                alert.message = "予期せぬエラーが発生しました"
-                            }
-                            self.presentViewController(alert, animated: true, completion: nil)
-                        }
-                    })
+                if let fb_id = result.valueForKey("id") as? String{
+                    self.iconImageView.af_setImageWithURL(NSURL(string: "https://graph.facebook.com/\(fb_id)/picture?width=200&height=200")!,
+                        placeholderImage: nil, filter: nil,
+                        imageTransition: UIImageView.ImageTransition.CrossDissolve(0.5))
                 }
             }
             else{

@@ -42,7 +42,7 @@ class SettingsTableViewController: UITableViewController {
         if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                let alert = UIAlertController(title: "ログアウトしてよろしいでしょうか？", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "ログアウトしてよろしいでしょうか？", message: nil, preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "キャンセル", style: .Cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "ログアウト", style: .Default, handler: { (action) in
                     self.logout()
