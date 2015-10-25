@@ -30,9 +30,7 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "次へ", style: .Plain, target: self, action: "showPostViewController")
-        tabBarController?.tabBar.translucent = false
-        tabBarController?.tabBar.hidden = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "次へ", style: .Plain, target: self, action: "modalPostViewController")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -57,7 +55,7 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
     }
     
     //フォトライブラリから全ての写真のPHAssetオブジェクトを取得する
-    private func getAllPhotosInfo() {
+    func getAllPhotosInfo() {
         //ソート条件を指定
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -76,13 +74,14 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
         selectedImageView.image = selectedImage
     }
     
-    func showPostViewController() {
-        performSegueWithIdentifier("showPostViewController", sender: nil)
+    func modalPostViewController() {
+        performSegueWithIdentifier("modalPostViewController", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
-        let postViewController = segue.destinationViewController as! PostViewController
+        let navigationController = segue.destinationViewController as! UINavigationController
+        let postViewController = navigationController.topViewController as! PostViewController
         postViewController.image = selectedImage
     }
 }

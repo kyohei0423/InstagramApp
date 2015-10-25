@@ -26,30 +26,29 @@ class PostViewController: UIViewController {
         lineShareButton.layer.borderWidth = 1
         twitterShareButton.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).CGColor
         twitterShareButton.layer.borderWidth = 1
+        
+        //ジェスチャーを追加
+        let tapGesture = UITapGestureRecognizer(target: self, action: "tapGesture:")
+        view.addGestureRecognizer(tapGesture)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func tapGesture(sender: UITapGestureRecognizer) {
+        textView.resignFirstResponder()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         selectedImage.image = image
-        tabBarController?.tabBar.translucent = true
-        tabBarController?.tabBar.hidden = true
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "投稿", style: .Plain, target: self, action: "post")
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "戻る", style: .Plain, target: self, action: "back")
     }
     
-    func post() {
-        
-        let postModel = PostModel(text: textView.text, image: selectedImage.image, date: <#T##String#>)
-    }
-    
-    func getDate() {
-        let date = NSDate()
-        
+    func back() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func setPostButton(){
@@ -60,4 +59,19 @@ class PostViewController: UIViewController {
         tabBarController?.tabBar.addSubview(postButton)
     }
     
+    func getDate() -> String {
+        let now = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyy/MM/dd HH:mm EEE"
+        let time = dateFormatter.stringFromDate(now)
+        print(time)
+        return time
+    }
+    
+    @IBAction func post(sender: UIButton) {
+        let time = getDate()
+        let post = Post(text: textView.text, image: selectedImage.image!, date: time)
+        post.save()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

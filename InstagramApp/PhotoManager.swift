@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoManager: NSObject, UICollectionViewDataSource {
     static let sharedPhotoManager = PhotoManager()
