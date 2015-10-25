@@ -144,7 +144,7 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func login(sender: UIButton) {    //実際にログインする
         let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         ParseAccess().loginUser(nameField.text, password: passField.text) { (succeeded, user, error) in
             if succeeded {
@@ -182,7 +182,7 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func loginWithFacebook(sender: UIButton) {    //実際にログインする
         let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         ParseAccess().loginUserWithFacebook { (user, isNew, error) in
             if let _error = error {

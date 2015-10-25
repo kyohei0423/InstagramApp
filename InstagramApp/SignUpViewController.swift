@@ -161,21 +161,21 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     func didPushedIconImageView(sender:UITapGestureRecognizer){
         let actionSheet = UIAlertController(title: "プロフィール写真を変更", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "キャンセル", style: .Cancel, handler: nil))
         
-        actionSheet.addAction(UIAlertAction(title: "Facebookからインポート", style: UIAlertActionStyle.Default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction(title: "Facebookからインポート", style: .Default, handler: { (action) in
             self.loadIconForFacebook()
         }))
         
         
         //TODO: シミュレータではカメラを動かせないので動作未検証
         /*
-        actionSheet.addAction(UIAlertAction(title: "写真を撮る", style: UIAlertActionStyle.Default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction(title: "写真を撮る", style: .Default, handler: { (action) in
         self.launchCamera()
         }))
         */
         
-        actionSheet.addAction(UIAlertAction(title: "ライブラリから選択", style: UIAlertActionStyle.Default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction(title: "ライブラリから選択", style: .Default, handler: { (action) in
             self.openCameraLibrary()
         }))
         
@@ -210,7 +210,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     func getUerDateForFB(){
         let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         let request=FBSDKGraphRequest(graphPath: "/me", parameters: [:], HTTPMethod: "GET")
         request.startWithCompletionHandler({ (connection, result, error) in

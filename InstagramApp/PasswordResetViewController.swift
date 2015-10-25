@@ -27,7 +27,7 @@ class PasswordResetViewController: UIViewController {
     
     @IBAction func didPushedSendButton(sender: UIButton) {
         let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         ParseAccess().resetPassword(emailField.text) { (succeeded, error) in
             if succeeded {
