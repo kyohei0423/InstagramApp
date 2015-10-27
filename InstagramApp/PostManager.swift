@@ -8,7 +8,16 @@
 
 import UIKit
 
-class PostManager: NSObject {
-    let sharedPostManager = PostManager()
+class PostManager: NSObject, UICollectionViewDataSource {
+    static let sharedPostManager = PostManager()
     var posts = [Post]()
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProfileCollectionViewCell", forIndexPath: indexPath)
+        return cell
+    }
 }

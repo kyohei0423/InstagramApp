@@ -37,6 +37,11 @@
 		E288B7921BDD06D800C18A98 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E288B7911BDD06D800C18A98 /* libsqlite3.tbd */; };
 		E288B7941BDD06EE00C18A98 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E288B7931BDD06EE00C18A98 /* libz.tbd */; };
 		E288B7961BDD081500C18A98 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E288B7951BDD081500C18A98 /* PostManager.swift */; settings = {ASSET_TAGS = (); }; };
+		E2BAAE301BDE03230067F4D7 /* kannna.png in Resources */ = {isa = PBXBuildFile; fileRef = E2BAAE2F1BDE03230067F4D7 /* kannna.png */; settings = {ASSET_TAGS = (); }; };
+		E2BAAE321BDE253C0067F4D7 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAE311BDE253C0067F4D7 /* MyPageViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E2BAAE341BDE257C0067F4D7 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAE331BDE257C0067F4D7 /* CustomView.swift */; settings = {ASSET_TAGS = (); }; };
+		E2BAAE3B1BDE2BD40067F4D7 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAAE391BDE2BD40067F4D7 /* ProfileCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		E2BAAE3C1BDE2BD40067F4D7 /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2BAAE3A1BDE2BD40067F4D7 /* ProfileCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		E2FDD00F1BDB718A00DF5C4C /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD00E1BDB718A00DF5C4C /* PostViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -94,6 +99,11 @@
 		E288B7911BDD06D800C18A98 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		E288B7931BDD06EE00C18A98 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E288B7951BDD081500C18A98 /* PostManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
+		E2BAAE2F1BDE03230067F4D7 /* kannna.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kannna.png; sourceTree = "<group>"; };
+		E2BAAE311BDE253C0067F4D7 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		E2BAAE331BDE257C0067F4D7 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		E2BAAE391BDE2BD40067F4D7 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2BAAE3A1BDE2BD40067F4D7 /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		E2FDD00E1BDB718A00DF5C4C /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +156,7 @@
 				E20F23F51BCF9F6A0077FEE4 /* Frameworks */,
 				E20F23F11BCE76B20077FEE4 /* camera@2x.png */,
 				E288B7611BDC921200C18A98 /* mypage.png */,
+				E2BAAE2F1BDE03230067F4D7 /* kannna.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,12 +173,12 @@
 		E20F23B41BCD189F0077FEE4 /* InstagramApp */ = {
 			isa = PBXGroup;
 			children = (
+				E20F23B91BCD189F0077FEE4 /* Main.storyboard */,
 				E20F23FC1BCFC1110077FEE4 /* View */,
 				E20F23E61BCD57A20077FEE4 /* Model */,
 				E20F23E31BCD4FB00077FEE4 /* Controller */,
 				E20F23B51BCD189F0077FEE4 /* AppDelegate.swift */,
 				E20F23B71BCD189F0077FEE4 /* ViewController.swift */,
-				E20F23B91BCD189F0077FEE4 /* Main.storyboard */,
 				E20F23BE1BCD189F0077FEE4 /* LaunchScreen.storyboard */,
 				E20F23C11BCD189F0077FEE4 /* Info.plist */,
 			);
@@ -195,9 +206,10 @@
 		E20F23E31BCD4FB00077FEE4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E20F23EF1BCE71C50077FEE4 /* TimeLineViewController.swift */,
+				E2BAAE311BDE253C0067F4D7 /* MyPageViewController.swift */,
 				E20F23FA1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift */,
 				E2FDD00E1BDB718A00DF5C4C /* PostViewController.swift */,
+				E20F23EF1BCE71C50077FEE4 /* TimeLineViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -236,8 +248,8 @@
 		E20F23FC1BCFC1110077FEE4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E20F23FD1BCFC16F0077FEE4 /* PhotoCollectionView.swift */,
-				E20F24031BCFC2060077FEE4 /* PhotoCollectionViewCell */,
+				E2BAAE231BDDF8830067F4D7 /* MyPageViewController */,
+				E2BAAE221BDDF8640067F4D7 /* ChoosePhotoViewController */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -249,6 +261,25 @@
 				E288B75A1BDBC1DB00C18A98 /* PhotoCollectionViewCell.xib */,
 			);
 			name = PhotoCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		E2BAAE221BDDF8640067F4D7 /* ChoosePhotoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E20F23FD1BCFC16F0077FEE4 /* PhotoCollectionView.swift */,
+				E20F24031BCFC2060077FEE4 /* PhotoCollectionViewCell */,
+			);
+			name = ChoosePhotoViewController;
+			sourceTree = "<group>";
+		};
+		E2BAAE231BDDF8830067F4D7 /* MyPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E2BAAE331BDE257C0067F4D7 /* CustomView.swift */,
+				E2BAAE391BDE2BD40067F4D7 /* ProfileCollectionViewCell.swift */,
+				E2BAAE3A1BDE2BD40067F4D7 /* ProfileCollectionViewCell.xib */,
+			);
+			name = MyPageViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,7 +386,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20F23C01BCD189F0077FEE4 /* LaunchScreen.storyboard in Resources */,
+				E2BAAE301BDE03230067F4D7 /* kannna.png in Resources */,
 				E288B75C1BDBC1DB00C18A98 /* PhotoCollectionViewCell.xib in Resources */,
+				E2BAAE3C1BDE2BD40067F4D7 /* ProfileCollectionViewCell.xib in Resources */,
 				E20F23BB1BCD189F0077FEE4 /* Main.storyboard in Resources */,
 				E288B7621BDC921200C18A98 /* mypage.png in Resources */,
 				E20F23F21BCE76B20077FEE4 /* camera@2x.png in Resources */,
@@ -389,8 +422,11 @@
 				E288B7561BDBBD9800C18A98 /* PhotoManager.swift in Sources */,
 				E20F23B81BCD189F0077FEE4 /* ViewController.swift in Sources */,
 				E20F23FB1BCFA1A40077FEE4 /* ChoosePhotoViewController.swift in Sources */,
+				E2BAAE321BDE253C0067F4D7 /* MyPageViewController.swift in Sources */,
 				E2FDD00F1BDB718A00DF5C4C /* PostViewController.swift in Sources */,
+				E2BAAE3B1BDE2BD40067F4D7 /* ProfileCollectionViewCell.swift in Sources */,
 				E288B7961BDD081500C18A98 /* PostManager.swift in Sources */,
+				E2BAAE341BDE257C0067F4D7 /* CustomView.swift in Sources */,
 				E20F23FE1BCFC16F0077FEE4 /* PhotoCollectionView.swift in Sources */,
 				E20F23B61BCD189F0077FEE4 /* AppDelegate.swift in Sources */,
 			);

@@ -9,9 +9,14 @@
 import UIKit
 import Photos
 
+@objc protocol PhotoManagerDelegate {
+    func showFirstImageView(image: UIImage)
+}
+
 class PhotoManager: NSObject, UICollectionViewDataSource {
     static let sharedPhotoManager = PhotoManager()
     var photoAssets = [UIImage]()
+    weak var customDelegate: PhotoManagerDelegate?
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoAssets.count
@@ -54,5 +59,7 @@ class PhotoManager: NSObject, UICollectionViewDataSource {
                 self.photoAssets.append(image!)
             }
         }
+        print("111111111111111")
+        customDelegate?.showFirstImageView(photoAssets[0])
     }
 }

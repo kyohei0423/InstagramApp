@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
+class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate, PhotoManagerDelegate {
     let photoManager = PhotoManager.sharedPhotoManager
     var selectedImage: UIImage!
     
@@ -18,8 +18,11 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoCollectionView.customDelegate = self
+        photoManager.customDelegate = self
         photoManager.checkAuthorizationStatus()
+//        selectedImageView.image = photoManager.photoAssets[0]
+        photoCollectionView.customDelegate = self
+        photoCollectionView.backgroundColor = UIColor.whiteColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,16 +35,6 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "次へ", style: .Plain, target: self, action: "modalPostViewController")
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        selectedImageView.image = photoManager.photoAssets[0]
-    }
-    
-    func selectedCellImage(image: UIImage) {
-        selectedImage = image
-        selectedImageView.image = selectedImage
-    }
-    
     func modalPostViewController() {
         performSegueWithIdentifier("modalPostViewController", sender: nil)
     }
@@ -51,5 +44,14 @@ class ChoosePhotoViewController: UIViewController, PhotoCollectionViewDelegate {
         let navigationController = segue.destinationViewController as! UINavigationController
         let postViewController = navigationController.topViewController as! PostViewController
         postViewController.image = selectedImage
+    }
+    //デリゲートメソッド
+    func selectedCellImage(image: UIImage) {
+        selectedImage = image
+        selectedImageView.image = selectedImage
+    }
+    
+    func showFirstImageView(image: UIImage) {
+        selectedImageView.image = image
     }
 }

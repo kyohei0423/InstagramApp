@@ -88,22 +88,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FQx-S1-Mse">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="301.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="302"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-gT-cIg">
-                                <rect key="frame" x="8" y="309" width="359" height="186.5"/>
+                                <rect key="frame" x="8" y="310" width="359" height="186"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afD-IW-6Z3">
-                                <rect key="frame" x="0.0" y="504" width="187.5" height="50"/>
+                                <rect key="frame" x="0.0" y="504" width="188" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="HAa-mX-u2h"/>
                                 </constraints>
                                 <state key="normal" title="Line"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BT4-WC-7HP">
-                                <rect key="frame" x="187" y="504" width="187.5" height="50"/>
+                                <rect key="frame" x="188" y="504" width="187" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bfn-ej-FiG"/>
                                 </constraints>
@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="906.5" y="1070.5"/>
         </scene>
-        <!--View Controller-->
+        <!--My Page View Controller-->
         <scene sceneID="4xy-6L-dlJ">
             <objects>
-                <viewController id="M5r-Zy-nBp" sceneMemberID="viewController">
+                <viewController id="M5r-Zy-nBp" customClass="MyPageViewController" customModule="InstagramApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DuW-yw-Z8v"/>
                         <viewControllerLayoutGuide type="bottom" id="bcd-LM-1gc"/>
