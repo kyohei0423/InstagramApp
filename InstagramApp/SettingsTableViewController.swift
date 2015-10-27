@@ -44,7 +44,7 @@ class SettingsTableViewController: UITableViewController {
             case 0:
                 let alert = UIAlertController(title: "ログアウトしてよろしいでしょうか？", message: nil, preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "キャンセル", style: .Cancel, handler: nil))
-                alert.addAction(UIAlertAction(title: "ログアウト", style: .Default, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "ログアウト", style: .Default, handler: { _ in
                     self.logout()
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
