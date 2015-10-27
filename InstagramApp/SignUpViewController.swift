@@ -63,7 +63,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
-        if fb_id != nil{
+        if fb_id != nil {
             self.iconImageView.af_setImageWithURL(NSURL(string: "https://graph.facebook.com/\(fb_id!)/picture?width=200&height=200")!,
                 placeholderImage: nil, filter: nil,
                 imageTransition: UIImageView.ImageTransition.CrossDissolve(0.5))
@@ -91,8 +91,8 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
             else{
                 self.alertLabelAnimation()
                 print(error)
-                if error?.domain == "InstagramAppError"{
-                    switch error!.code{
+                if error?.domain == "InstagramAppError" {
+                    switch error!.code {
                     case InstagramAppErrorType.NameNotInput.rawValue:
                         self.alertLabel.text = "名前が入力されていません"
                         break
@@ -106,8 +106,8 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                         break
                     }
                 }
-                else if error?.domain == "Parse"{
-                    switch error!.code{
+                else if error?.domain == "Parse" {
+                    switch error!.code {
                     case PFErrorCode.ErrorInvalidEmailAddress.rawValue:
                         self.alertLabel.text = "メールアドレスが不正です"
                         break
@@ -122,7 +122,7 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                         break
                     }
                 }
-                else{
+                else {
                     self.alertLabel.text = "不明なエラーです"
                 }
             }
@@ -197,14 +197,15 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     func getFBPermissions(){
         let login = FBSDKLoginManager()
         login.logInWithReadPermissions(["public_profile","email"], fromViewController: self) { (result, error) in
-            if error != nil {
+            guard error == nil else {
                 print(error)
                 return
             }
-            else if result.isCancelled {
+            
+            if result.isCancelled {
                 print("Cancelled")
             }
-            else{
+            else {
                 if (result.grantedPermissions.contains("public_profile") && result.grantedPermissions.contains("email")) {
                     self.getUerDateForFB()
                 }
@@ -218,22 +219,17 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         
         let request=FBSDKGraphRequest(graphPath: "/me", parameters: [:], HTTPMethod: "GET")
         request.startWithCompletionHandler({ (connection, result, error) in
-            if(error != nil){
+            guard error == nil || result != nil else {
                 print(error)
                 alert.message = "Facebookからユーザ情報を取得できませんでした"
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
             }
-            else if(result != nil){
-                if let fb_id = result.valueForKey("id") as? String{
-                    self.iconImageView.af_setImageWithURL(NSURL(string: "https://graph.facebook.com/\(fb_id)/picture?width=200&height=200")!,
-                        placeholderImage: nil, filter: nil,
-                        imageTransition: UIImageView.ImageTransition.CrossDissolve(0.5))
-                }
-            }
-            else{
-                alert.message = "Facebookからユーザ情報を取得できませんでした"
-                self.presentViewController(alert, animated: true, completion: nil)
+            
+            if let fb_id = result.valueForKey("id") as? String {
+                self.iconImageView.af_setImageWithURL(NSURL(string: "https://graph.facebook.com/\(fb_id)/picture?width=200&height=200")!,
+                    placeholderImage: nil, filter: nil,
+                    imageTransition: UIImageView.ImageTransition.CrossDissolve(0.5))
             }
         })
     }
@@ -272,11 +268,11 @@ class SignUpViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     func keyboardDidShow(sender:NSNotification){
         let keyboardFrameEnd = sender.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue
         print(keyboardFrameEnd)
-        if let height = keyboardFrameEnd?.height{
+        if let height = keyboardFrameEnd?.height {
             view.setNeedsUpdateConstraints()
             
             view.removeConstraint(iconImageViewCenterY)
-            if iconImageViewMovedCenterY != nil{
+            if iconImageViewMovedCenterY != nil {
                 view.removeConstraint(iconImageViewMovedCenterY!)
             }
             

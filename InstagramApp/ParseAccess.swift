@@ -11,7 +11,7 @@ import Parse
 import ParseFacebookUtilsV4
 import FBSDKCoreKit
 
-enum InstagramAppErrorType : Int{
+enum InstagramAppErrorType: Int {
     case NameNotInput = 0
     case PasswordNotInput
     case EmailNotInput
@@ -19,21 +19,19 @@ enum InstagramAppErrorType : Int{
 }
 
 class ParseAccess: NSObject {
-    func signUpUser(name:String?, password:String?, email:String?, icon:UIImage?, complitionHander:(succeeded:Bool, error:NSError?) -> Void){
-        let error : NSError
-        
+    func signUpUser(name: String?, password: String?, email: String?, icon: UIImage?, complitionHander: (succeeded: Bool, error: NSError?) -> Void) {
         if email == nil || email == "" {
-            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.EmailNotInput.rawValue, userInfo: nil)
+            let error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.EmailNotInput.rawValue, userInfo: nil)
             complitionHander(succeeded: false, error: error)
             return
         }
         else if name == nil || name == "" {
-            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
+            let error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
             complitionHander(succeeded: false, error: error)
             return
         }
         else if password == nil || password == "" {
-            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.PasswordNotInput.rawValue, userInfo: nil)
+            let error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.PasswordNotInput.rawValue, userInfo: nil)
             complitionHander(succeeded: false, error: error)
             return
         }
@@ -71,7 +69,7 @@ class ParseAccess: NSObject {
         }
     }
     
-    func loginUserWithFacebook(complitionHander:((user:PFUser?, isNew:Bool?, error:NSError?) -> Void)?){
+    func loginUserWithFacebook(complitionHander: ((user: PFUser?, isNew: Bool?, error: NSError?) -> Void)?) {
         let permissions = ["user_about_me","email"]
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) in
             if user == nil {
@@ -92,15 +90,14 @@ class ParseAccess: NSObject {
         }
     }
 
-    func loginUser(name:String?, password:String?, complitionHander:((succeeded:Bool, user:PFUser?, error:NSError?) -> Void)?){
-        let error : NSError
+    func loginUser(name: String?, password: String?, complitionHander: ((succeeded: Bool, user: PFUser?, error: NSError?) -> Void)?) {
         if name == nil || name == "" {
-            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
+            let error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
             complitionHander?(succeeded: false, user:nil, error: error)
             return
         }
         else if password == nil || password == "" {
-            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.PasswordNotInput.rawValue, userInfo: nil)
+            let error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.PasswordNotInput.rawValue, userInfo: nil)
             complitionHander?(succeeded: false, user:nil, error: error)
             return
         }
@@ -121,10 +118,9 @@ class ParseAccess: NSObject {
         }
     }
     
-    func resetPassword(email:String?, complitionHander:((succeeded:Bool, error:NSError?) -> Void)?){
-        let error : NSError
+    func resetPassword(email: String?, complitionHander: ((succeeded: Bool, error: NSError?) -> Void)?) {
         if email == nil || email == "" {
-            error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
+            let error = NSError(domain: "InstagramAppError", code: InstagramAppErrorType.NameNotInput.rawValue, userInfo: nil)
             complitionHander?(succeeded: false, error: error)
             return
         }

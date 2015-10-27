@@ -69,17 +69,18 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         getFBPermissions()
     }
     
-    func getFBPermissions(){
+    func getFBPermissions() {
         let login = FBSDKLoginManager()
         login.logInWithReadPermissions(["public_profile","email"], fromViewController: self) { (result, error) in
-            if error != nil{
+            guard error == nil else {
                 print(error)
                 return
             }
-            else if result.isCancelled {
+            
+            if result.isCancelled {
                 print("Cancelled")
             }
-            else{
+            else {
                 if (result.grantedPermissions.contains("public_profile") && result.grantedPermissions.contains("email")) {
                     self.getUerDateForFB()
                 }
@@ -87,44 +88,46 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    func getUerDateForFB(){
+    func getUerDateForFB() {
         let request=FBSDKGraphRequest(graphPath: "/me?fields=first_name,last_name,email", parameters: nil, HTTPMethod: "GET")
         request.startWithCompletionHandler({ (connection, result, error) in
-            if(error != nil){
+            guard error == nil else {
                 print(error)
                 return
             }
-            else if(result != nil){
-                let firstName = result.valueForKey("first_name") as! String
-                let lastName = result.valueForKey("last_name") as! String
-                let name = firstName + lastName
-                
-                let email = result.valueForKey("email") as! String
-                let id = result.valueForKey("id") as! String
-
-                let dict = ["name":name, "email":email, "fb_id":id]
-                
-                self.performSegueWithIdentifier("SignUp", sender: dict)
-            }
-            else{
+            guard result == nil else {
                 print("Can't get user datas")
+                return
             }
             
+            let firstName = result.valueForKey("first_name") as! String
+            let lastName = result.valueForKey("last_name") as! String
+            let name = firstName + lastName
+            
+            let email = result.valueForKey("email") as! String
+            let id = result.valueForKey("id") as! String
+            
+            let dict = ["name":name, "email":email, "fb_id":id]
+            
+            self.performSegueWithIdentifier("SignUp", sender: dict)
+    
         })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SignUp"{
-            if let view = segue.destinationViewController as? SignUpViewController{
-                if sender === self.emailField {
-                    view.email = self.emailField.text
-                }
-                else{
-                    if let dict = sender as? [String:String]{
-                        view.email = dict["email"]
-                        view.name = dict["name"]
-                        view.fb_id = dict["fb_id"]
-                    }
+        guard segue.identifier == "SignUp" else {
+            return
+        }
+        
+        if let view = segue.destinationViewController as? SignUpViewController {
+            if sender === self.emailField {
+                view.email = self.emailField.text
+            }
+            else {
+                if let dict = sender as? [String:String] {
+                    view.email = dict["email"]
+                    view.name = dict["name"]
+                    view.fb_id = dict["fb_id"]
                 }
             }
         }
@@ -148,15 +151,9 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         ParseAccess().loginUser(nameField.text, password: passField.text) { (succeeded, user, error) in
-            if succeeded {
-                print("success!!")
-                alert.title = "ログインに成功しました"
-                self.presentViewController(alert, animated: true, completion: nil)
-                self.loginSucceeded()
-            }
-            else if error != nil {
-                if error!.domain == "InstagramAppError"{
-                    switch error!.code{
+            if let error = error {
+                if error.domain == "InstagramAppError" {
+                    switch error.code{
                     case InstagramAppErrorType.NameNotInput.rawValue:
                         alert.message = "名前が入力されていません"
                         break
@@ -169,15 +166,23 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
                     }
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
-                else{
+                else {
                     alert.message = "不明なエラーです"
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
-            else{
+            
+            guard succeeded == true else {
                 alert.message = "不明なエラーです"
                 self.presentViewController(alert, animated: true, completion: nil)
+                return
             }
+            
+            print("success!!")
+            alert.title = "ログインに成功しました"
+            self.presentViewController(alert, animated: true, completion: nil)
+            self.loginSucceeded()
+            
         }
     }
     
@@ -186,9 +191,9 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         
         ParseAccess().loginUserWithFacebook { (user, isNew, error) in
-            if let _error = error {
-                if _error.domain == "InstagramAppError" {
-                    if _error.code == InstagramAppErrorType.Canceled.rawValue {
+            guard error == nil else {
+                if error!.domain == "InstagramAppError" {
+                    if error!.code == InstagramAppErrorType.Canceled.rawValue {
                         print("canceled")
                         alert.title = "Facebookログインがキャンセルされました"
                         self.presentViewController(alert, animated: true, completion: nil)
@@ -198,24 +203,30 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
                 }
-                else{
+                else {
                     alert.message = "不明なエラー"
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
+                return
             }
-            else if user != nil{
-                if isNew == true {
-                    print("success!!")
-                    self.loginSucceeded()
-                    alert.title = "新規ユーザーを作成し、ログインしました"
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-                else{
-                    print("success!!")
-                    self.loginSucceeded()
-                    alert.title = "ログインに成功しました"
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
+            
+            guard user != nil else{
+                alert.message = "不明なエラー"
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if isNew == true {
+                print("success!!")
+                self.loginSucceeded()
+                alert.title = "新規ユーザーを作成し、ログインしました"
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else {
+                print("success!!")
+                self.loginSucceeded()
+                alert.title = "ログインに成功しました"
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         }
     }
@@ -243,10 +254,10 @@ class NonLoginViewController: UIViewController,UITextFieldDelegate {
         if textField === emailField{
             self.performSegueWithIdentifier("SignUp", sender: textField)
         }
-        else if textField === nameField{
+        else if textField === nameField {
             passField.becomeFirstResponder()
         }
-        else if textField === passField{
+        else if textField === passField {
             passField.resignFirstResponder()
             login(loginButton)
         }
