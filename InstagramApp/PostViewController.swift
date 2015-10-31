@@ -22,6 +22,7 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         postView = view as! PostView
         
+        postView.postButton.addTarget(self, action: "tapPostButton", forControlEvents: .TouchUpInside)
         
         //ジェスチャーを追加
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapGesture:")
@@ -54,12 +55,12 @@ class PostViewController: UIViewController {
         let time = dateFormatter.stringFromDate(now)
         return time
     }
-//
-//    @IBAction func post(sender: UIButton) {
-//        let time = getDate()
-//        let post = Post(text: textView.text, image: selectedImage.image!, date: time)
-//        post.save()
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
+
+    func tapPostButton() {
+        let time = getDate()
+        let post = Post(text: postView.textView.text, image: postView.imageView.image!, date: time)
+        post.save()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }
