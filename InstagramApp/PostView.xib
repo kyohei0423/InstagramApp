@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleAspectFill" id="iN0-l3-epB" customClass="PostView" customModule="InstagramApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ved-NP-APy">
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <color key="backgroundColor" red="0.13725490200000001" green="0.29803921570000003" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="3J3-HY-ZAl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="19"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="投 稿"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4K-kR-CQR">
+                    <rect key="frame" x="0.0" y="583" width="187.5" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="IS3-kG-eUy"/>
+                    </constraints>
+                    <state key="normal" title="Twitter"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnh-iv-v47">
+                    <rect key="frame" x="187.5" y="583" width="187.5" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="vly-0n-y0E"/>
+                    </constraints>
+                    <state key="normal" title="Line"/>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rYe-XH-jfn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8W2-vF-aXU">
+                    <rect key="frame" x="8" y="341.5" width="359" height="233.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ved-NP-APy" firstAttribute="top" secondItem="j4K-kR-CQR" secondAttribute="bottom" id="9wM-Xh-cBH"/>
+                <constraint firstAttribute="trailing" secondItem="lnh-iv-v47" secondAttribute="trailing" id="Czu-ce-MCf"/>
+                <constraint firstItem="8W2-vF-aXU" firstAttribute="top" secondItem="rYe-XH-jfn" secondAttribute="bottom" constant="8" id="DOD-Pe-b0f"/>
+                <constraint firstItem="lnh-iv-v47" firstAttribute="width" secondItem="j4K-kR-CQR" secondAttribute="width" id="EjF-P2-aCB"/>
+                <constraint firstAttribute="trailing" secondItem="Ved-NP-APy" secondAttribute="trailing" id="ItW-EV-pFp"/>
+                <constraint firstItem="8W2-vF-aXU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="KDj-H9-XmZ"/>
+                <constraint firstItem="j4K-kR-CQR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Q9j-na-T1k"/>
+                <constraint firstItem="Ved-NP-APy" firstAttribute="top" secondItem="lnh-iv-v47" secondAttribute="bottom" id="Wu2-Le-dib"/>
+                <constraint firstItem="lnh-iv-v47" firstAttribute="top" secondItem="8W2-vF-aXU" secondAttribute="bottom" constant="8" id="Yvz-p1-sjM"/>
+                <constraint firstAttribute="bottom" secondItem="Ved-NP-APy" secondAttribute="bottom" id="bQo-Jq-pXO"/>
+                <constraint firstItem="rYe-XH-jfn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dyp-cw-Exn"/>
+                <constraint firstAttribute="trailing" secondItem="rYe-XH-jfn" secondAttribute="trailing" id="gb7-tD-N7I"/>
+                <constraint firstItem="rYe-XH-jfn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ifM-k8-DgW"/>
+                <constraint firstItem="j4K-kR-CQR" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="oH2-Tc-rh7"/>
+                <constraint firstItem="Ved-NP-APy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="p4Y-qh-lCj"/>
+                <constraint firstAttribute="trailing" secondItem="8W2-vF-aXU" secondAttribute="trailing" constant="8" id="pts-ik-4In"/>
+                <constraint firstItem="rYe-XH-jfn" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="rlh-g0-CX8"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <connections>
+                <outlet property="imageView" destination="rYe-XH-jfn" id="lkW-gw-9Bg"/>
+                <outlet property="lineButton" destination="lnh-iv-v47" id="8HF-7O-T5j"/>
+                <outlet property="postButton" destination="Ved-NP-APy" id="dNo-Mm-ojd"/>
+                <outlet property="textView" destination="8W2-vF-aXU" id="DaO-8q-qKq"/>
+                <outlet property="twitterButton" destination="j4K-kR-CQR" id="6Nk-qx-qkd"/>
+            </connections>
+        </view>
+    </objects>
+</document>

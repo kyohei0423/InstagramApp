@@ -9,8 +9,9 @@
 import UIKit
 import Photos
 
-@objc protocol PhotoManagerDelegate {
+protocol PhotoManagerDelegate: class {
     func showFirstImageView(image: UIImage)
+    func showAlert()
 }
 
 class PhotoManager: NSObject, UICollectionViewDataSource {
@@ -37,6 +38,8 @@ class PhotoManager: NSObject, UICollectionViewDataSource {
         switch status {
         case .Authorized:
             getAllPhotosInfo()
+        case .Denied:
+            customDelegate?.showAlert()
         default:
             PHPhotoLibrary.requestAuthorization({ (status) in
                 if status == .Authorized {
@@ -55,11 +58,11 @@ class PhotoManager: NSObject, UICollectionViewDataSource {
         let assets: PHFetchResult = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
         assets.enumerateObjectsUsingBlock { (asset, index, stop) in
             let manager = PHImageManager()
-            manager.requestImageForAsset(asset as! PHAsset, targetSize: CGSize(width: 1000, height: 1000), contentMode: .AspectFill, options: nil) { (image, info) in
+            manager.requestImageForAsset(asset as! PHAsset, targetSize: CGSize(width: 800, height: 800), contentMode: .AspectFill, options: nil) { (image, info) in
                 self.photoAssets.append(image!)
             }
         }
-        print("111111111111111")
         customDelegate?.showFirstImageView(photoAssets[0])
     }
+    
 }

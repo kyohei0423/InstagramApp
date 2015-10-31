@@ -26,10 +26,7 @@ class Post: NSObject {
         postObject["text"] = text
         postObject["image"] = image
         postObject["date"] = date
-        postObject.saveInBackgroundWithBlock { (success, error) in
-            if success {
-                print("投稿成功")
-            }
-        }
+        postObject.saveInBackground()
     }
+    
 }

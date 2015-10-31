@@ -8,16 +8,16 @@
 
 import UIKit
 
-class CustomView: UIView {
+class MyPageView: UIView {
     
-    var flowLayout = UICollectionViewFlowLayout()
+    var flowLayout: UICollectionViewFlowLayout
     var collectionView: UICollectionView
     
-    required init(manager: PostManager) {
+    required init(manager: MyPagePostManager) {
+        flowLayout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
         collectionView.registerNib(UINib(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfileCollectionViewCell")
         super.init(frame: CGRectZero)
-        self.backgroundColor = UIColor.redColor()
         addSubview(collectionView)
     }
 
@@ -27,9 +27,10 @@ class CustomView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        collectionView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         collectionView.backgroundColor = UIColor.whiteColor()
-        print(self.frame)
+        collectionView.frame.origin = CGPointZero
+        collectionView.frame.size = frame.size
+        collectionView.backgroundColor = UIColor.whiteColor()
         setCollectionViewLayout()
     }
     
@@ -39,4 +40,5 @@ class CustomView: UIView {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
     }
+    
 }

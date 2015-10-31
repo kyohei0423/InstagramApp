@@ -9,17 +9,17 @@
 import UIKit
 
 class MyPageViewController: UIViewController, UICollectionViewDelegate {
-    let postManager = PostManager.sharedPostManager
+    let myPagePostManager = MyPagePostManager()
     
     override func loadView() {
-        view = CustomView(manager: postManager)
+        view = MyPageView(manager: myPagePostManager)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let customView = view as! CustomView
-        customView.collectionView.delegate = self
-        customView.collectionView.dataSource = postManager
+        let myPageView = view as! MyPageView
+        myPageView.collectionView.delegate = self
+        myPageView.collectionView.dataSource = myPagePostManager
         navigationController?.navigationBar.translucent = false
     }
 
@@ -27,16 +27,5 @@ class MyPageViewController: UIViewController, UICollectionViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
