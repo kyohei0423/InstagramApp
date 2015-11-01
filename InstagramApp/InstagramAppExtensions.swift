@@ -37,3 +37,35 @@ extension UIImageView {
         task.resume()
     }
 }
+
+extension UIImage{
+    /**URLから画像を取得**/
+    class func imageWithURL(URL url: NSURL, complitionHander:(image:UIImage?, error:NSError?) -> Void){
+        let req = NSURLRequest(URL:url)
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(req) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
+            
+            guard error == nil else{
+                // Handle error...
+                complitionHander(image: nil, error: error)
+                return
+            }
+            
+            if let image = UIImage(data:data!) {
+                complitionHander(image: image, error: error)
+            }
+            else{
+                complitionHander(image: nil, error: error)
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    /**FacebookIDから画像を取得**/
+    class func imageWithFacebookId(FacebookID id:String, complitionHander:(image:UIImage?, error:NSError?) -> Void) {
+        let url = NSURL(string: "https://graph.facebook.com/\(id)/picture?type=large")
+        UIImage.imageWithURL(URL: url!, complitionHander: complitionHander)
+    }
+}
