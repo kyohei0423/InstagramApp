@@ -12,8 +12,11 @@ class ChoosePhotoView: UIView {
     var flowLayout: UICollectionViewFlowLayout
     var photoCollectionView: PhotoCollectionView
     var selectedImageView: UIImageView
+    var photoModel: PhotoModel
+    var selectedImage: UIImage?
     
-    required init(managr: PhotoManager) {
+    required init(model: PhotoModel) {
+        photoModel = model
         selectedImageView = UIImageView(frame: CGRectZero)
         flowLayout = UICollectionViewFlowLayout()
         photoCollectionView = PhotoCollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
@@ -29,23 +32,18 @@ class ChoosePhotoView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        //画像の設定
         selectedImageView.frame.origin = CGPointZero
         selectedImageView.frame.size = CGSize(width: frame.width, height: (frame.height + 44) / 2)
         selectedImageView.contentMode = .ScaleAspectFill
         
+        //コレクションビューの設定
         photoCollectionView.backgroundColor = UIColor.whiteColor()
         photoCollectionView.frame.origin = CGPoint(x: 0, y: (frame.height + 44) / 2)
         photoCollectionView.frame.size = CGSize(width: frame.width, height: (frame.height - 44) / 2)
-        photoCollectionView.backgroundColor = UIColor.whiteColor()
-        setCollectionViewLayout()
+        
+        //コレクションビューのセルのレイアウト
+        flowLayout.setCollectionViewLayout(frame.width)
     }
     
-    func setCollectionViewLayout() {
-        let itemLength = frame.width / 3
-        flowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
-    }
-    
-
 }

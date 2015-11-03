@@ -1,5 +1,5 @@
 //
-//  PostManager.swift
+//  PostModel.swift
 //  InstagramApp
 //
 //  Created by Seo Kyohei on 2015/10/25.
@@ -7,9 +7,26 @@
 //
 
 import UIKit
+import Parse
 
 class PostModel: NSObject {
-    static let sharedPostModel = PostModel()
-    var posts = [Post]()
+    var text: String
+    var image: PFFile
+    var date: String
+    
+    init(text: String, image: UIImage, date: String) {
+        self.text = text
+        let imageDate = UIImagePNGRepresentation(image)!
+        self.image = PFFile(name: "image.png", data: imageDate)!
+        self.date = date
+    }
+    
+    func save() {
+        let postObject = PFObject(className: "Post")
+        postObject["text"] = text
+        postObject["image"] = image
+        postObject["date"] = date
+        postObject.saveInBackground()
+    }
     
 }

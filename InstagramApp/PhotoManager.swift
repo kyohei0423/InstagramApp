@@ -10,26 +10,15 @@ import UIKit
 import Photos
 
 protocol PhotoManagerDelegate: class {
-    func showFirstImageView(image: UIImage)
-    func showAlert()
+    func photoManager(photoManager: PhotoManager, showFirstImageView image: UIImage)
+    func photoManagerShowAlert(photoManager: PhotoManager)
 }
 
-class PhotoManager: NSObject, UICollectionViewDataSource {
+class PhotoManager: NSObject {
     static let sharedPhotoManager = PhotoManager()
     var photoAssets = [UIImage]()
     weak var customDelegate: PhotoManagerDelegate?
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoAssets.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCollectionViewCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
-        cell.photoImage.image = photoAssets[indexPath.row]
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.whiteColor().CGColor
-        return cell
-    }
     
     //フォトライブラリへのアクセス許可を求める
     func checkAuthorizationStatus() {
@@ -39,7 +28,7 @@ class PhotoManager: NSObject, UICollectionViewDataSource {
         case .Authorized:
             getAllPhotosInfo()
         case .Denied:
-            customDelegate?.showAlert()
+            customDelegate?.photoManagerShowAlert(self)
         default:
             PHPhotoLibrary.requestAuthorization({ (status) in
                 if status == .Authorized {
@@ -56,13 +45,15 @@ class PhotoManager: NSObject, UICollectionViewDataSource {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         let assets: PHFetchResult = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
-        assets.enumerateObjectsUsingBlock { (asset, index, stop) in
+        assets.enumerateObjectsUsingBlock { (asset, _, _) in
             let manager = PHImageManager()
-            manager.requestImageForAsset(asset as! PHAsset, targetSize: CGSize(width: 800, height: 800), contentMode: .AspectFill, options: nil) { (image, info) in
+            let options = PHImageRequestOptions()
+            options.synchronous = true
+            manager.requestImageForAsset(asset as! PHAsset, targetSize: CGSize(width: 300, height: 300), contentMode: .AspectFill, options: nil) { (image, _) in
                 self.photoAssets.append(image!)
             }
         }
-        customDelegate?.showFirstImageView(photoAssets[0])
+        customDelegate?.photoManager(self, showFirstImageView: photoAssets[0])
     }
     
 }

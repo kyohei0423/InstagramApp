@@ -10,16 +10,17 @@ import UIKit
 
 class MyPageViewController: UIViewController, UICollectionViewDelegate {
     let myPagePostManager = MyPagePostManager()
+    let myPagePostModel = MyPagePostModel()
     
     override func loadView() {
-        view = MyPageView(manager: myPagePostManager)
+        view = MyPageView(model: myPagePostModel)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let myPageView = view as! MyPageView
         myPageView.collectionView.delegate = self
-        myPageView.collectionView.dataSource = myPagePostManager
+        myPageView.collectionView.dataSource = myPagePostModel
         navigationController?.navigationBar.translucent = false
     }
 

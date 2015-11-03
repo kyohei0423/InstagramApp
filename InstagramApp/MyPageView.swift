@@ -13,7 +13,7 @@ class MyPageView: UIView {
     var flowLayout: UICollectionViewFlowLayout
     var collectionView: UICollectionView
     
-    required init(manager: MyPagePostManager) {
+    required init(model: MyPagePostModel) {
         flowLayout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
         collectionView.registerNib(UINib(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfileCollectionViewCell")
@@ -27,18 +27,14 @@ class MyPageView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        //コレクションビューの設定
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.frame.origin = CGPointZero
         collectionView.frame.size = frame.size
         collectionView.backgroundColor = UIColor.whiteColor()
-        setCollectionViewLayout()
-    }
-    
-    func setCollectionViewLayout() {
-        let itemLength = frame.width / 3
-        flowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
+        
+        //コレクションビューのセルの設定
+        flowLayout.setCollectionViewLayout(frame.width)
     }
     
 }

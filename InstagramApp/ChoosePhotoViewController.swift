@@ -8,33 +8,25 @@
 
 import UIKit
 
-class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate, PhotoCollectionViewDelegate {
+class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate,  UICollectionViewDelegate{
     let photoManager = PhotoManager.sharedPhotoManager
-    var selectedImage: UIImage!
+    var photoModel = PhotoModel()
     var choosePhotoView: ChoosePhotoView!
     
     override func loadView() {
-        view = ChoosePhotoView(managr: photoManager)
+        view = ChoosePhotoView(model: photoModel)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         choosePhotoView = view as! ChoosePhotoView
-        
-        choosePhotoView.photoCollectionView.dataSource = photoManager
-        choosePhotoView.photoCollectionView.customDelegate = self
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        choosePhotoView.photoCollectionView.delegate = self
+        choosePhotoView.photoCollectionView.dataSource = photoModel
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "次へ", style: .Plain, target: self, action: "modalPostViewController")
-//        photoManager.customDelegate = self
-//        photoManager.checkAuthorizationStatus()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "次へ", style: .Plain, target: self, action: "transitionModalPostViewController")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -42,7 +34,12 @@ class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate, PhotoCo
         photoManager.checkAuthorizationStatus()
     }
     
-    func modalPostViewController() {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func transitionModalPostViewController() {
         performSegueWithIdentifier("ModalPostViewController", sender: nil)
     }
     
@@ -50,21 +47,24 @@ class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate, PhotoCo
         super.prepareForSegue(segue, sender: sender)
         let navigationController = segue.destinationViewController as! UINavigationController
         let postViewController = navigationController.topViewController as! PostViewController
-        postViewController.image = selectedImage
+        
+        postViewController.image = choosePhotoView.selectedImage
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+        let image = selectedCell.photoImage.image
+        choosePhotoView.selectedImageView.image = image
+    }
+    
     //デリゲートメソッド
-    func showFirstImageView(image: UIImage) {
-        selectedImage = image
-        choosePhotoView.selectedImageView.image = selectedImage
+    func photoManager(photoManager: PhotoManager, showFirstImageView image: UIImage) {
+        choosePhotoView.selectedImage = image
+        choosePhotoView.selectedImageView.image = choosePhotoView.selectedImage
         choosePhotoView.photoCollectionView.reloadData()
     }
     
-    func showSelectedCellImage(image: UIImage) {
-        selectedImage = image
-        choosePhotoView.selectedImageView.image = selectedImage
-    }
-    
-    func showAlert () {
+    func photoManagerShowAlert(photoManager: PhotoManager) {
         let alertController = UIAlertController(title: nil, message: "カメラロールへのアクセスが許可されていません", preferredStyle: .Alert)
         let configAction = UIAlertAction(title: "設定画面へ", style: .Default, handler: { (action: UIAlertAction) in
             self.moveConfig()

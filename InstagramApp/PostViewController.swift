@@ -9,9 +9,8 @@
 import UIKit
 
 class PostViewController: UIViewController {
-    
+    var postView: PostView?
     var image: UIImage!
-    var postView: PostView!
     
     override func loadView() {
         let nib = UINib(nibName: "PostView", bundle: nil)
@@ -20,14 +19,18 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postView = view as! PostView
-        
-        postView.postButton.addTarget(self, action: "tapPostButton", forControlEvents: .TouchUpInside)
+        postView = view as? PostView
+        postView!.postButton.addTarget(self, action: "tapPostButton", forControlEvents: .TouchUpInside)
         
         //ジェスチャーを追加
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapGesture:")
         view.addGestureRecognizer(tapGesture)
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        postView!.imageView.image = image
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "戻る", style: .Plain, target: self, action: "back")
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,30 +38,16 @@ class PostViewController: UIViewController {
     }
     
     func tapGesture(sender: UITapGestureRecognizer) {
-        postView.textView.resignFirstResponder()
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        postView.imageView.image = image
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "戻る", style: .Plain, target: self, action: "back")
+        postView!.textView.resignFirstResponder()
     }
 
     func back() {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    func getDate() -> String {
-        let now = NSDate()
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyy/MM/dd HH:mm EEE"
-        let time = dateFormatter.stringFromDate(now)
-        return time
-    }
 
     func tapPostButton() {
-        let time = getDate()
-        let post = Post(text: postView.textView.text, image: postView.imageView.image!, date: time)
+        let dateTime = NSDate.getDateTime()
+        let post = PostModel(text: postView!.textView.text, image: postView!.imageView.image!, date: dateTime)
         post.save()
         dismissViewControllerAnimated(true, completion: nil)
     }

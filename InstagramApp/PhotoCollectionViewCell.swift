@@ -15,6 +15,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var photoImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        layer.borderColor = UIColor.whiteColor().CGColor
+        layer.borderWidth = 1
     }
 
 }
