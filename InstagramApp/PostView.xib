@@ -23,7 +23,7 @@
                     <state key="normal" title="投 稿"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4K-kR-CQR">
-                    <rect key="frame" x="0.0" y="583" width="187.5" height="40"/>
+                    <rect key="frame" x="0.0" y="583" width="188" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="IS3-kG-eUy"/>
                     </constraints>
@@ -37,7 +37,7 @@
                     <state key="normal" title="Line"/>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rYe-XH-jfn">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
                 </imageView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8W2-vF-aXU">
                     <rect key="frame" x="8" y="342" width="359" height="233"/>

@@ -9,15 +9,16 @@
 import UIKit
 import Photos
 
-protocol PhotoManagerDelegate: class {
-    func photoManager(photoManager: PhotoManager, showFirstImageView image: UIImage)
-    func photoManagerShowAlert(photoManager: PhotoManager)
+protocol ChoosePhotoManagerDelegate: class {
+    func choosePhotoManager(choosePhotoManager: ChoosePhotoManager, showFirstImageView image: UIImage)
+    func choosePhotoManagerShowAlert(choosePhotoManager: ChoosePhotoManager)
 }
 
-class PhotoManager: NSObject {
-    static let sharedPhotoManager = PhotoManager()
+class ChoosePhotoManager: NSObject {
+    
+    static let sharedChoosePhotoManager = ChoosePhotoManager()
     var photoAssets = [UIImage]()
-    weak var customDelegate: PhotoManagerDelegate?
+    weak var customDelegate: ChoosePhotoManagerDelegate?
     
     
     //フォトライブラリへのアクセス許可を求める
@@ -28,7 +29,7 @@ class PhotoManager: NSObject {
         case .Authorized:
             getAllPhotosInfo()
         case .Denied:
-            customDelegate?.photoManagerShowAlert(self)
+            customDelegate?.choosePhotoManagerShowAlert(self)
         default:
             PHPhotoLibrary.requestAuthorization({ (status) in
                 if status == .Authorized {
@@ -53,7 +54,7 @@ class PhotoManager: NSObject {
                 self.photoAssets.append(image!)
             }
         }
-        customDelegate?.photoManager(self, showFirstImageView: photoAssets[0])
+        customDelegate?.choosePhotoManager(self, showFirstImageView: photoAssets[0])
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  PhotoModel.swift
+//  ChoosePhotoModel.swift
 //  InstagramApp
 //
 //  Created by Seo Kyohei on 2015/11/03.
@@ -9,9 +9,10 @@
 import UIKit
 import Photos
 
-class PhotoModel: NSObject, UICollectionViewDataSource {
-    let photoAssets = PhotoManager.sharedPhotoManager.photoAssets
+class ChoosePhotoModel: NSObject, UICollectionViewDataSource {
+    var photoAssets = [UIImage]()
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        photoAssets = ChoosePhotoManager.sharedChoosePhotoManager.photoAssets
         return photoAssets.count
     }
     

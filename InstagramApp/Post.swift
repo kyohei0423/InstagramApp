@@ -1,5 +1,5 @@
 //
-//  PostModel.swift
+//  Post.swift
 //  InstagramApp
 //
 //  Created by Seo Kyohei on 2015/10/25.
@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class PostModel: NSObject {
+class Post: NSObject {
     var text: String
     var image: PFFile
     var date: String

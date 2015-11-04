@@ -9,8 +9,7 @@
 import UIKit
 
 class PostViewController: UIViewController {
-    var postView: PostView?
-    var image: UIImage!
+    var _image: UIImage!
     
     override func loadView() {
         let nib = UINib(nibName: "PostView", bundle: nil)
@@ -19,8 +18,8 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postView = view as? PostView
-        postView!.postButton.addTarget(self, action: "tapPostButton", forControlEvents: .TouchUpInside)
+        let postView = view as! PostView
+        postView.postButton.addTarget(self, action: "tapPostButton", forControlEvents: .TouchUpInside)
         
         //ジェスチャーを追加
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapGesture:")
@@ -29,7 +28,8 @@ class PostViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        postView!.imageView.image = image
+        let postView = view as! PostView
+        postView.imageView.image = _image
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "戻る", style: .Plain, target: self, action: "back")
     }
     
@@ -38,7 +38,8 @@ class PostViewController: UIViewController {
     }
     
     func tapGesture(sender: UITapGestureRecognizer) {
-        postView!.textView.resignFirstResponder()
+        let postView = view as! PostView
+        postView.textView.resignFirstResponder()
     }
 
     func back() {
@@ -47,7 +48,8 @@ class PostViewController: UIViewController {
 
     func tapPostButton() {
         let dateTime = NSDate.getDateTime()
-        let post = PostModel(text: postView!.textView.text, image: postView!.imageView.image!, date: dateTime)
+        let postView = view as! PostView
+        let post = Post(text: postView.textView.text, image: postView.imageView.image!, date: dateTime)
         post.save()
         dismissViewControllerAnimated(true, completion: nil)
     }

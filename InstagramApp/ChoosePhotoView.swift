@@ -12,11 +12,11 @@ class ChoosePhotoView: UIView {
     var flowLayout: UICollectionViewFlowLayout
     var photoCollectionView: PhotoCollectionView
     var selectedImageView: UIImageView
-    var photoModel: PhotoModel
+    var choosePhotoModel: ChoosePhotoModel
     var selectedImage: UIImage?
     
-    required init(model: PhotoModel) {
-        photoModel = model
+    required init(model: ChoosePhotoModel) {
+        choosePhotoModel = model
         selectedImageView = UIImageView(frame: CGRectZero)
         flowLayout = UICollectionViewFlowLayout()
         photoCollectionView = PhotoCollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)

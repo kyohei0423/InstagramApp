@@ -8,20 +8,20 @@
 
 import UIKit
 
-class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate,  UICollectionViewDelegate{
-    let photoManager = PhotoManager.sharedPhotoManager
-    var photoModel = PhotoModel()
+class ChoosePhotoViewController: UIViewController, ChoosePhotoManagerDelegate,  UICollectionViewDelegate{
+    let choosePhotoManager = ChoosePhotoManager.sharedChoosePhotoManager
+    let choosePhotoModel = ChoosePhotoModel()
     var choosePhotoView: ChoosePhotoView!
     
     override func loadView() {
-        view = ChoosePhotoView(model: photoModel)
+        view = ChoosePhotoView(model: choosePhotoModel)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         choosePhotoView = view as! ChoosePhotoView
         choosePhotoView.photoCollectionView.delegate = self
-        choosePhotoView.photoCollectionView.dataSource = photoModel
+        choosePhotoView.photoCollectionView.dataSource = choosePhotoModel
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -30,8 +30,8 @@ class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate,  UIColl
     }
     
     override func viewDidAppear(animated: Bool) {
-        photoManager.customDelegate = self
-        photoManager.checkAuthorizationStatus()
+        choosePhotoManager.customDelegate = self
+        choosePhotoManager.checkAuthorizationStatus()
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,7 +48,7 @@ class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate,  UIColl
         let navigationController = segue.destinationViewController as! UINavigationController
         let postViewController = navigationController.topViewController as! PostViewController
         
-        postViewController.image = choosePhotoView.selectedImage
+        postViewController._image = choosePhotoView.selectedImage
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -58,13 +58,13 @@ class ChoosePhotoViewController: UIViewController, PhotoManagerDelegate,  UIColl
     }
     
     //デリゲートメソッド
-    func photoManager(photoManager: PhotoManager, showFirstImageView image: UIImage) {
+    func choosePhotoManager(photoManager: ChoosePhotoManager, showFirstImageView image: UIImage) {
         choosePhotoView.selectedImage = image
         choosePhotoView.selectedImageView.image = choosePhotoView.selectedImage
         choosePhotoView.photoCollectionView.reloadData()
     }
     
-    func photoManagerShowAlert(photoManager: PhotoManager) {
+    func choosePhotoManagerShowAlert(photoManager: ChoosePhotoManager) {
         let alertController = UIAlertController(title: nil, message: "カメラロールへのアクセスが許可されていません", preferredStyle: .Alert)
         let configAction = UIAlertAction(title: "設定画面へ", style: .Default, handler: { (action: UIAlertAction) in
             self.moveConfig()
